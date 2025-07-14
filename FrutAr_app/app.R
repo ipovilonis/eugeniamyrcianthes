@@ -1,115 +1,95 @@
 library(shiny)
-library(leaflet)
 library(dplyr)
-library(DT)
+library(tidyr)
 library(readr)
-library(sf)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(bslib)
 
-# Leer base de datos
-especies_df <- read_delim("data_base_CFN.txt", delim = "\t", col_types = cols(.default = "c"))
-
-# Cargar provincias de Argentina
-provincias_sf <- ne_states(country = "Argentina", returnclass = "sf") %>%
-  st_transform(4326)
-
-# Diccionario de nombres a siglas
-prov_siglas <- c(
-  "Buenos Aires" = "BA", "Catamarca" = "CM", "Chaco" = "CH", "Chubut" = "CU", 
-  "Córdoba" = "CR", "Corrientes" = "CS", "Entre Ríos" = "ER", "Formosa" = "FS",
-  "Jujuy" = "JJ", "La Pampa" = "LP", "La Rioja" = "LR", "Mendoza" = "MZ",
-  "Misiones" = "MS", "Neuquén" = "NQ", "Río Negro" = "RN", "Salta" = "ST",
-  "San Juan" = "SJ", "San Luis" = "SL", "Santa Cruz" = "SC", "Santa Fe" = "SF",
-  "Santiago del Estero" = "SE", "Tierra del Fuego" = "TF", "Tucumán" = "TC"
+# Cargar datos de frutales nativos
+frutales <- read_delim(
+  "data_base_CFN.txt",
+  delim     = "\t",
+  col_types = cols(.default = "c")
 )
 
-# UI
-theme_custom <- bs_theme(
-  version = 5,
-  bootswatch = "minty",
-  base_font = font_google("Roboto"),
-  heading_font = font_google("Montserrat"),
-  primary = "#2c7fb8"
+# Expandir filas por cada provincia en "Distribución"
+frutales2 <- frutales %>%
+  mutate(Distribución = gsub("\\s+", "", Distribución)) %>%
+  separate_rows(Distribución, sep = ",") %>%
+  rename(prov = Distribución)
+
+# Mapeo de códigos a nombres completos de provincia
+prov_names <- c(
+  BA = "Buenos Aires",
+  CM = "Catamarca",
+  CH = "Chaco",
+  CU = "Chubut",
+  CR = "Córdoba",
+  CS = "Corrientes",
+  ER = "Entre Ríos",
+  FS = "Formosa",
+  FR = "Formosa",
+  JJ = "Jujuy",
+  LP = "La Pampa",
+  LR = "La Rioja",
+  MZ = "Mendoza",
+  MS = "Misiones",
+  NQ = "Neuquén",
+  RN = "Río Negro",
+  SC = "Santa Cruz",
+  SF = "Santa Fe",
+  SJ = "San Juan",
+  SL = "Salta",
+  SE = "Santiago del Estero",
+  ST = "Santa Cruz",  # Si hubiera duplicados, ajusta según necesidad
+  TC = "Tucumán",
+  TF = "Tierra del Fuego"
 )
+
+# Crear lista de elecciones: valores=code, etiquetas nombre completo
+prov_choices <- unique(frutales2$prov)
+prov_labels  <- prov_names[prov_choices]
+# Sustituir NA con el mismo código
+prov_labels[is.na(prov_labels)] <- prov_choices[is.na(prov_labels)]
+# Ordenar alfabéticamente por etiqueta
+ord <- order(prov_labels)
+prov_choices <- prov_choices[ord]
+prov_labels  <- prov_labels[ord]
 
 ui <- fluidPage(
-  theme = theme_custom,
-  tags$head(
-    tags$title("FrutAr - Explorador de Frutales Nativos"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "www/estilos.css")
-  ),
-  titlePanel("FrutAr – Explorador de Frutales Nativos"),
+  titlePanel("FrutAr: Seleccione Provincia"),
   sidebarLayout(
     sidebarPanel(
-      actionButton("reset", "Reiniciar selección", class = "btn-primary"),
-      br(), br(),
-      textOutput("provincia_seleccionada")
+      selectInput(
+        inputId = "prov",
+        label   = "Provincia:",
+        choices = setNames(prov_choices, prov_labels),
+        selected = prov_choices[1]
+      )
     ),
     mainPanel(
-      fluidRow(
-        column(12,
-               leafletOutput("mapa", height = 500)
-        )
-      ),
-      fluidRow(
-        column(12,
-               h4("Especies recomendadas para este sitio:"),
-               DTOutput("tabla")
-        )
-      )
+      h3("Frutales nativos disponibles"),
+      tableOutput("table")
     )
   )
 )
 
-# Server
 server <- function(input, output, session) {
-  provincia_nombre <- reactiveVal(NULL)
-  
-  output$mapa <- renderLeaflet({
-    leaflet(provincias_sf) %>%
-      addProviderTiles("CartoDB.Positron") %>%
-      addPolygons(
-        label = ~name,
-        fillColor = "lightblue",
-        fillOpacity = 0.3,
-        color = "black",
-        weight = 1
-      )
+  # Filtrar datos según provincia seleccionada
+  selected <- reactive({
+    frutales2 %>%
+      filter(prov == input$prov) %>%
+      select(Especie, `Nombre común`) %>%
+      distinct()
   })
   
-  observeEvent(input$mapa_click, {
-    punto <- st_point(c(input$mapa_click$lng, input$mapa_click$lat)) %>%
-      st_sfc(crs = 4326)
-    
-    prov <- provincias_sf[st_contains(provincias_sf, punto, sparse = FALSE), ]
-    
-    if (nrow(prov) > 0) {
-      provincia_nombre(prov$name[1])
+  # Mostrar tabla
+  output$table <- renderTable({
+    df <- selected()
+    if (nrow(df) == 0) {
+      data.frame(Mensaje = "No hay frutales listados para esta provincia.")
     } else {
-      provincia_nombre(NULL)
+      df
     }
-  })
-  
-  observeEvent(input$reset, {
-    provincia_nombre(NULL)
-  })
-  
-  output$provincia_seleccionada <- renderText({
-    req(provincia_nombre())
-    paste("Provincia detectada:", provincia_nombre())
-  })
-  
-  output$tabla <- renderDT({
-    req(provincia_nombre())
-    sigla <- prov_siglas[[provincia_nombre()]]
-    req(!is.null(sigla))
-    
-    especies_df %>%
-      filter(grepl(sigla, Distribución)) %>%
-      select(Especie, `Nombre común`, `Incorporación al CAA`, Hábito)
-  }, options = list(pageLength = 10, dom = 'tip'))
+  }, striped = TRUE, bordered = TRUE)
 }
 
 shinyApp(ui = ui, server = server)

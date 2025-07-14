@@ -2484,7 +2484,7 @@ for (variable in variables_respuesta) {
   assign(paste0("Tabla_", variable), frutos_fisico %>%
     dplyr::filter(!is.na(get(variable))) %>% # Filtra los datos sin NA para la variable actual
     dplyr::group_by(year, site, phenotype) %>%
-    dplyr::summarise(!!sym(variable) := mean(!!sym(variable))
+    dplyr::summarise(!!sym(variable) := mean(!!sym(variable), .groups = "drop")
               )
   )
   
@@ -3516,20 +3516,6 @@ library(dendextend)
 library(dplyr)
 library(plotly)
 
-# 1. Clustering Jerárquico (HCA)
-dist_matrix <- dist(pca_scores[, c("PC1", "PC2", "PC3")], method = "euclidean")
-hclust_result <- hclust(dist_matrix, method = "ward.D2")
-
-# # Método del codo
-# fviz_nbclust(pca_scores[, c("PC1", "PC2", "PC3")], hcut, method = "wss") +
-#   labs(title = "Método del codo para número óptimo de clusters")
-
-# Dendrograma con fenotipos y colores (solución robusta)
-# Cortar en 7 clusters (cambiamos de 3 a 7)
-k_clusters <- 7
-clusters_hca <- cutree(hclust_result, k = k_clusters)
-pca_scores$cluster_hca <- as.factor(clusters_hca)
-
 # Definir paleta de 7 colores
 paleta_7 <- c(
   "#FF0000",  # Rojo puro
@@ -3541,50 +3527,61 @@ paleta_7 <- c(
   "#FFA500"   # Naranja
 )
 
-# Dendrograma con R base, etiquetas de fenotipos y rectángulos para 7 clusters
-plot(hclust_result, 
-     labels = pca_scores$phenotype, 
-     main = "Dendrograma de Clustering Jerárquico (k = 7)", 
-     xlab = "", 
-     sub = "", 
-     cex = 1.2,         # Tamaño de las etiquetas de fenotipos (aumentado de 0.6 a 1.2)
-     cex.main = 1.5,    # Tamaño del título (1.5 veces el tamaño base)
-     hang = -1)         # Alinea etiquetas en la base
-rect.hclust(hclust_result, k = 7, border = paleta_7)
+# 0. Asegurar que los rownames de pca_scores sean tus códigos reales
+rownames(pca_scores) <- as.character(pca_scores$phenotype)
 
-# 2. Clustering con k-means
-set.seed(123)
-kmeans_result <- kmeans(pca_scores[, c("PC1", "PC2", "PC3")], centers = k_clusters, nstart = 25)
-pca_scores$cluster_kmeans <- as.factor(kmeans_result$cluster)
+# 1. Clustering Jerárquico (HCA)
+dist_matrix    <- dist(pca_scores[, c("PC1", "PC2", "PC3")], method = "euclidean")
+hclust_result  <- hclust(dist_matrix, method = "ward.D2")
 
-# # Visualización HCA en 2D
-# gg_hca <- ggplot(pca_scores, aes(x = PC1, y = PC2, color = cluster_hca)) +
-#   geom_point(size = 5) +
-#   scale_color_manual(values = paleta_7) +
-#   labs(title = "Clustering Jerárquico (HCA)",
-#        x = "Componente Principal 1 (35,7 %)",
-#        y = "Componente Principal 2 (18,2 %)") +
-#   theme_classic() +
-#   theme(legend.position = "bottom",
-#         text = element_text(size = 24, color = 'black'),
-#         axis.text = element_text(color = 'black')) +
-#   coord_cartesian(xlim = c(-6, 6), ylim = c(-6, 6))
-# print(gg_hca)
-# 
-# # Visualización k-means en 2D
-# gg_kmeans <- ggplot(pca_scores, aes(x = PC1, y = PC2, color = cluster_kmeans)) +
-#   geom_point(size = 5) +
-#   scale_color_manual(values = paleta_7) +
-#   labs(title = "Clustering k-means",
-#        x = "Componente Principal 1 (35,7 %)",
-#        y = "Componente Principal 2 (18,2 %)") +
-#   theme_classic() +
-#   theme(legend.position = "bottom",
-#         text = element_text(size = 24, color = 'black'),
-#         axis.text = element_text(color = 'black')) +
-#   coord_cartesian(xlim = c(-6, 6), ylim = c(-6, 6))
-# print(gg_kmeans)
-# 
+# 2. Cortar en 7 clusters
+k_clusters     <- 7
+clusters_hca   <- cutree(hclust_result, k = k_clusters)
+pca_scores$cluster_hca <- factor(clusters_hca)
+
+# 3. Convertir a dendrograma
+dendro_obj <- as.dendrogram(hclust_result)
+
+# 4. Graficar con factoextra, usando los rownames como etiquetas
+cluster_dend <- fviz_dend(
+  dendro_obj,
+  k                   = k_clusters,     # número de clusters
+  k_colors            = paleta_7,       # paleta para las líneas
+  cex                 = 1.5,            # tamaño global de etiquetas
+  lwd                 = 1,              # grosor de líneas
+  show_labels         = TRUE,           # usar rownames(dat) como labels
+  cex_labels          = 1.2,            # tamaño específico de las labels
+  rect                = TRUE,           # dibujar rectángulos
+  rect_colors         = paleta_7,       # borde de rectángulos
+  rect_lwd            = 1,              # grosor del borde
+  rect_lty            = 5,              # tipo de línea del borde
+  rect_fill           = FALSE,          # sin relleno interior
+  color_labels_by_k   = FALSE           # no colorear labels según cluster
+) +
+  theme_classic() +
+  labs(
+    title = "",
+    x     = "Fenotipos",
+    y     = "Distancia"
+  ) +
+  theme(
+    legend.position   = "bottom",
+    legend.title      = element_blank(),
+    text              = element_text(size = 38, color = 'black'),
+    axis.text.x       = element_blank(),
+    axis.ticks.x      = element_blank(),
+    axis.line.x       = element_blank(),
+    axis.title.y      = element_text(color = "black"),
+    axis.text.y       = element_text(color = "black"),
+    axis.line.y       = element_line(color = "black")
+  ) +
+  scale_y_continuous(limits = c(-2, 18))
+
+# 5. Mostrar el dendrograma
+print(cluster_dend)
+
+# ggsave("cluster_dend.tiff", plot = cluster_dend, device = "tiff", width = 15, height = 10, units = "in", dpi = 300)
+
 
 ```
 
@@ -3633,41 +3630,42 @@ gg_pca_fruits_cluster_hca <- fviz_pca_biplot(pca_result,
   coord_cartesian(xlim = c(-5, 6.5), ylim = c(-7.5, 5))
 print(gg_pca_fruits_cluster_hca)
 
+# ggsave("gg_pca_fruits_cluster_hcas.tiff", plot = gg_pca_fruits_cluster_hca, device = "tiff", width = 15, height = 10, units = "in", dpi = 300)
 
 ```
 
-Ploty 3D
+
 ```{r , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=24, fig.height=16}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
-
-paleta_7b <- c(
-  "#0000FF",  
-  "#FFFF00",  
-  "#00FF00",  
-  "#FFA500",  
-  "#FF00FF",  
-  "#FF0000",  
-  "#00FFFF"   
-)
-
-# Visualización 3D con plotly
-ploty3D_sf <- plot_ly(data = pca_scores,
-             x = ~PC1,
-             y = ~PC2,
-             z = ~PC3,
-             type = 'scatter3d',
-             mode = 'markers',
-             marker = list(size = 10),
-             color = ~cluster_kmeans,
-             colors = paleta_7b) %>%
-     layout(scene = list(xaxis = list(title = 'PC1'),
-                         yaxis = list(title = 'PC2'),
-                         zaxis = list(title = 'PC3')),
-            title = "Clusters k-means en 3D",
-            legend = list(title = list(text = "Clusters"))
-     )
-            
-ploty3D_sf
+# Ploty 3D
+# paleta_7b <- c(
+#   "#0000FF",  
+#   "#FFFF00",  
+#   "#00FF00",  
+#   "#FFA500",  
+#   "#FF00FF",  
+#   "#FF0000",  
+#   "#00FFFF"   
+# )
+# 
+# # Visualización 3D con plotly
+# ploty3D_sf <- plot_ly(data = pca_scores,
+#              x = ~PC1,
+#              y = ~PC2,
+#              z = ~PC3,
+#              type = 'scatter3d',
+#              mode = 'markers',
+#              marker = list(size = 10),
+#              color = ~cluster_kmeans,
+#              colors = paleta_7b) %>%
+#      layout(scene = list(xaxis = list(title = 'PC1'),
+#                          yaxis = list(title = 'PC2'),
+#                          zaxis = list(title = 'PC3')),
+#             title = "Clusters k-means en 3D",
+#             legend = list(title = list(text = "Clusters"))
+#      )
+#             
+# ploty3D_sf
 
 
 ```

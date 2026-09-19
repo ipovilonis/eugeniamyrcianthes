@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Fibras</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+  <link rel="icon" type="image/png" href="fruto.jpg"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Inicio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">I Introducción</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    II Sitios
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="II_Phenotypes2.html">Fenotipos</a>
+    </li>
+    <li>
+      <a href="II_maps1.html">Mapas</a>
+    </li>
+    <li>
+      <a href="II_ER_Climate.html">Clima</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">ENTRE RÍOS</li>
+    <li class="divider"></li>
+    <li>
+      <a href="II_ER_SMN.html">MET ER</a>
+    </li>
+    <li>
+      <a href="II_ER_DL.html">DL ER</a>
+    </li>
+    <li>
+      <a href="II_ER_Soil.html">Suelos ER</a>
+    </li>
+    <li>
+      <a href="II_ER_Asociatedspecies.html">Especies asociadas</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">MORENO</li>
+    <li class="divider"></li>
+    <li>
+      <a href="II_M_inta.html">MET M</a>
+    </li>
+    <li>
+      <a href="II_M_Soil.html">Suelos M</a>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    III Fenología
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="III_Flowers.html">Fenología</a>
+    </li>
+    <li>
+      <a href="III_Yield.html">Rendimiento</a>
+    </li>
+    <li>
+      <a href="III_Polinization.html">Polinización</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    IV Maduración
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mad_resume.html">Tablas resumen</a>
+    </li>
+    <li>
+      <a href="madPhysical.html">Atributos físicos</a>
+    </li>
+    <li>
+      <a href="madAntioxidant.html">Actividad antioxidante</a>
+    </li>
+    <li>
+      <a href="madPhenols.html">Fenoles</a>
+    </li>
+    <li>
+      <a href="madSSyAcidez.html">Sólidos Solubles y Acidez</a>
+    </li>
+    <li>
+      <a href="madAcids.html">Ácidos orgánicos</a>
+    </li>
+    <li>
+      <a href="madCarbohydrates.html">Carbohidratos</a>
+    </li>
+    <li>
+      <a href="madFiber.html">Fibra dietaria</a>
+    </li>
+    <li>
+      <a href="madCations.html">Cationes</a>
+    </li>
+    <li>
+      <a href="mad_PCA.html">Multivariado</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    V Postcosecha
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Ensayo1.html">Ensayo 1</a>
+    </li>
+    <li>
+      <a href="Ensayo2.html">Ensayo 2</a>
+    </li>
+    <li>
+      <a href="Ensayo3.html">Ensayo 3</a>
+    </li>
+    <li>
+      <a href="Ensayo4.html">Ensayo 4</a>
+    </li>
+    <li>
+      <a href="Ensayo5.html">Ensayo 5</a>
+    </li>
+    <li>
+      <a href="Ensayo6.html">Ensayo 6</a>
+    </li>
+    <li>
+      <a href="Ensayo7.html">Ensayo 7</a>
+    </li>
+    <li>
+      <a href="Ensayo8.html">Ensayo 8</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    VI Variabilidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="V_Colorimetry.html">Colorimetría</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="V_flowers.html">Variables reproductivas</a>
+    </li>
+    <li>
+      <a href="V_Branches.html">Eficiencia reproductiva</a>
+    </li>
+    <li>
+      <a href="V_fruits.html">Frutos</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="V_correlations.html">Correlaciones</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Otros ensayos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Genetics.html">Extracción de ADN</a>
+    </li>
+    <li>
+      <a href="extraction_methods.html">Extracción química</a>
+    </li>
+    <li>
+      <a href="q2022_quimico.html">Variables químicas 2022</a>
+    </li>
+    <li>
+      <a href="secado.html">Secado ER</a>
+    </li>
+    <li>
+      <a href="dry_test.html">Pruebas de Secado</a>
+    </li>
+    <li>
+      <a href="calafate.html">Calafate</a>
+    </li>
+    <li>
+      <a href="microprop.html">Micropropagación</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="publications.html">Publicaciones</a>
+</li>
+<li>
+  <a href="bibliografia.html">Bibliografía</a>
+</li>
+<li>
+  <a href="about.html">Sobre el sitio</a>
+</li>
+<li>
+  <a href="FrutAr.html">FrutAr</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ipovilonis/ubajay.github.io">
+    <span class=" favicon.ico"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Fibras</h1>
+
+</div>
+
+
+<div id="fibra-dietaria-en-peso-fresco" class="section level2">
+<h2>Fibra Dietaria en peso fresco</h2>
+<p>Concentración de Fibras dietarias a distintos estados de madurez</p>
+<p>Tabla descriptiva</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CAR</th>
+<th align="left">MAD</th>
+<th align="right">N</th>
+<th align="right">CONF</th>
+<th align="right">sd</th>
+<th align="right">se</th>
+<th align="right">ci</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">DT</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">75.087368183</td>
+<td align="right">5.726177848</td>
+<td align="right">3.306010322</td>
+<td align="right">14.224614336</td>
+</tr>
+<tr class="even">
+<td align="left">DT</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">73.648407290</td>
+<td align="right">0.836259988</td>
+<td align="right">0.482814929</td>
+<td align="right">2.077384973</td>
+</tr>
+<tr class="odd">
+<td align="left">DT</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">58.643424940</td>
+<td align="right">5.245601653</td>
+<td align="right">3.028549527</td>
+<td align="right">13.030796888</td>
+</tr>
+<tr class="even">
+<td align="left">DT</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">59.364112013</td>
+<td align="right">10.083517853</td>
+<td align="right">5.821721747</td>
+<td align="right">25.048846965</td>
+</tr>
+<tr class="odd">
+<td align="left">FDI</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">4.573333333</td>
+<td align="right">0.255799401</td>
+<td align="right">0.147685853</td>
+<td align="right">0.635440938</td>
+</tr>
+<tr class="even">
+<td align="left">FDI</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">3.300000000</td>
+<td align="right">0.463573079</td>
+<td align="right">0.267644042</td>
+<td align="right">1.151579369</td>
+</tr>
+<tr class="odd">
+<td align="left">FDI</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">1.770000000</td>
+<td align="right">0.234307490</td>
+<td align="right">0.135277493</td>
+<td align="right">0.582052073</td>
+</tr>
+<tr class="even">
+<td align="left">FDI</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">1.926666667</td>
+<td align="right">0.446579594</td>
+<td align="right">0.257832849</td>
+<td align="right">1.109365210</td>
+</tr>
+<tr class="odd">
+<td align="left">FDS</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">1.546666667</td>
+<td align="right">0.522525916</td>
+<td align="right">0.301680479</td>
+<td align="right">1.298026334</td>
+</tr>
+<tr class="even">
+<td align="left">FDS</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">1.176666667</td>
+<td align="right">0.115902258</td>
+<td align="right">0.066916200</td>
+<td align="right">0.287917169</td>
+</tr>
+<tr class="odd">
+<td align="left">FDS</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">1.260000000</td>
+<td align="right">0.306431069</td>
+<td align="right">0.176918060</td>
+<td align="right">0.761216974</td>
+</tr>
+<tr class="even">
+<td align="left">FDS</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">1.296666667</td>
+<td align="right">0.256969518</td>
+<td align="right">0.148361421</td>
+<td align="right">0.638347671</td>
+</tr>
+<tr class="odd">
+<td align="left">FDT</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">6.120000000</td>
+<td align="right">0.664605146</td>
+<td align="right">0.383709960</td>
+<td align="right">1.650970706</td>
+</tr>
+<tr class="even">
+<td align="left">FDT</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">4.476666667</td>
+<td align="right">0.578302113</td>
+<td align="right">0.333882880</td>
+<td align="right">1.436582086</td>
+</tr>
+<tr class="odd">
+<td align="left">FDT</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">3.030000000</td>
+<td align="right">0.458257569</td>
+<td align="right">0.264575131</td>
+<td align="right">1.138374910</td>
+</tr>
+<tr class="even">
+<td align="left">FDT</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">3.223333333</td>
+<td align="right">0.273007936</td>
+<td align="right">0.157621206</td>
+<td align="right">0.678189310</td>
+</tr>
+<tr class="odd">
+<td align="left">IS</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">0.337176961</td>
+<td align="right">0.106139554</td>
+<td align="right">0.061279700</td>
+<td align="right">0.263665268</td>
+</tr>
+<tr class="even">
+<td align="left">IS</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">0.357918606</td>
+<td align="right">0.015322810</td>
+<td align="right">0.008846628</td>
+<td align="right">0.038063969</td>
+</tr>
+<tr class="odd">
+<td align="left">IS</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">0.714046517</td>
+<td align="right">0.148099678</td>
+<td align="right">0.085505389</td>
+<td align="right">0.367899994</td>
+</tr>
+<tr class="even">
+<td align="left">IS</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">0.716549022</td>
+<td align="right">0.284083827</td>
+<td align="right">0.164015874</td>
+<td align="right">0.705703348</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CAR</th>
+<th align="left">MAD</th>
+<th align="right">N</th>
+<th align="right">CONS</th>
+<th align="right">sd</th>
+<th align="right">se</th>
+<th align="right">ci</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">DT</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">75.087368183</td>
+<td align="right">5.726177848</td>
+<td align="right">3.306010322</td>
+<td align="right">14.224614336</td>
+</tr>
+<tr class="even">
+<td align="left">DT</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">73.648407290</td>
+<td align="right">0.836259988</td>
+<td align="right">0.482814929</td>
+<td align="right">2.077384973</td>
+</tr>
+<tr class="odd">
+<td align="left">DT</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">58.643424940</td>
+<td align="right">5.245601653</td>
+<td align="right">3.028549527</td>
+<td align="right">13.030796888</td>
+</tr>
+<tr class="even">
+<td align="left">DT</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">59.364112013</td>
+<td align="right">10.083517853</td>
+<td align="right">5.821721747</td>
+<td align="right">25.048846965</td>
+</tr>
+<tr class="odd">
+<td align="left">FDI</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">26.711396027</td>
+<td align="right">1.494043536</td>
+<td align="right">0.862586438</td>
+<td align="right">3.711409891</td>
+</tr>
+<tr class="even">
+<td align="left">FDI</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">27.132095630</td>
+<td align="right">3.811427005</td>
+<td align="right">2.200528407</td>
+<td align="right">9.468109558</td>
+</tr>
+<tr class="odd">
+<td align="left">FDI</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">15.818493943</td>
+<td align="right">2.094006564</td>
+<td align="right">1.208975254</td>
+<td align="right">5.201800675</td>
+</tr>
+<tr class="even">
+<td align="left">FDI</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">15.510289417</td>
+<td align="right">3.595110074</td>
+<td align="right">2.075637769</td>
+<td align="right">8.930748512</td>
+</tr>
+<tr class="odd">
+<td align="left">FDS</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">9.033591658</td>
+<td align="right">3.051908894</td>
+<td align="right">1.762020422</td>
+<td align="right">7.581361978</td>
+</tr>
+<tr class="even">
+<td align="left">FDS</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">9.674373493</td>
+<td align="right">0.952930649</td>
+<td align="right">0.550174767</td>
+<td align="right">2.367210961</td>
+</tr>
+<tr class="odd">
+<td align="left">FDS</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">11.260622809</td>
+<td align="right">2.738575147</td>
+<td align="right">1.581117098</td>
+<td align="right">6.802997798</td>
+</tr>
+<tr class="even">
+<td align="left">FDS</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">10.438585786</td>
+<td align="right">2.068687683</td>
+<td align="right">1.194357391</td>
+<td align="right">5.138905087</td>
+</tr>
+<tr class="odd">
+<td align="left">FDT</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">35.744987683</td>
+<td align="right">3.881748815</td>
+<td align="right">2.241128723</td>
+<td align="right">9.642798618</td>
+</tr>
+<tr class="even">
+<td align="left">FDT</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">36.806469120</td>
+<td align="right">4.754711582</td>
+<td align="right">2.745134012</td>
+<td align="right">11.811358349</td>
+</tr>
+<tr class="odd">
+<td align="left">FDT</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">27.079116753</td>
+<td align="right">4.095448922</td>
+<td align="right">2.364508538</td>
+<td align="right">10.173659114</td>
+</tr>
+<tr class="even">
+<td align="left">FDT</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">25.948875200</td>
+<td align="right">2.197802130</td>
+<td align="right">1.268901652</td>
+<td align="right">5.459643155</td>
+</tr>
+<tr class="odd">
+<td align="left">IS</td>
+<td align="left">I</td>
+<td align="right">3</td>
+<td align="right">0.337176961</td>
+<td align="right">0.106139554</td>
+<td align="right">0.061279700</td>
+<td align="right">0.263665268</td>
+</tr>
+<tr class="even">
+<td align="left">IS</td>
+<td align="left">MM</td>
+<td align="right">3</td>
+<td align="right">0.357918606</td>
+<td align="right">0.015322810</td>
+<td align="right">0.008846628</td>
+<td align="right">0.038063969</td>
+</tr>
+<tr class="odd">
+<td align="left">IS</td>
+<td align="left">M</td>
+<td align="right">3</td>
+<td align="right">0.714046517</td>
+<td align="right">0.148099678</td>
+<td align="right">0.085505389</td>
+<td align="right">0.367899994</td>
+</tr>
+<tr class="even">
+<td align="left">IS</td>
+<td align="left">SM</td>
+<td align="right">3</td>
+<td align="right">0.716549022</td>
+<td align="right">0.284083827</td>
+<td align="right">0.164015874</td>
+<td align="right">0.705703348</td>
+</tr>
+</tbody>
+</table>
+<div id="fibra-dietaria-soluble" class="section level3">
+<h3>Fibra Dietaria Soluble</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## 
+## Call:
+## lm(formula = CONF ~ MAD, data = FDSdata, control = ctrl)
+## 
+## Coefficients:
+## (Intercept)        MADMM         MADM        MADSM  
+##    1.546667    -0.370000    -0.286667    -0.250000</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-4-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-4-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.9125853, p-value = 0.230236</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONF
+##           Df Sum Sq    Mean Sq F value  Pr(&gt;F)
+## MAD        3 0.2282 0.07606667  0.6816 0.58769
+## Residuals  8 0.8928 0.11160000</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD     emmean          SE df    lower.CL   upper.CL
+##  I   1.54666667 0.192873015  8 1.101900696 1.99143264
+##  MM  1.17666667 0.192873015  8 0.731900696 1.62143264
+##  M   1.26000000 0.192873015  8 0.815234029 1.70476597
+##  SM  1.29666667 0.192873015  8 0.851900696 1.74143264
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast     estimate          SE df t.ratio p.value
+##  I - MM    0.370000000 0.272763634  8   1.356  0.5566
+##  I - M     0.286666667 0.272763634  8   1.051  0.7264
+##  I - SM    0.250000000 0.272763634  8   0.917  0.7971
+##  MM - M   -0.083333333 0.272763634  8  -0.306  0.9894
+##  MM - SM  -0.120000000 0.272763634  8  -0.440  0.9698
+##  M - SM   -0.036666667 0.272763634  8  -0.134  0.9991
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fibra-dietaria-insoluble" class="section level3">
+<h3>Fibra Dietaria Insoluble</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## 
+## Call:
+## lm(formula = CONF ~ MAD, data = FDIdata, control = ctrl)
+## 
+## Coefficients:
+## (Intercept)        MADMM         MADM        MADSM  
+##     4.57333     -1.27333     -2.80333     -2.64667</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-7-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.9503981, p-value = 0.642813</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONF
+##           Df    Sum Sq  Mean Sq  F value      Pr(&gt;F)    
+## MAD        3 15.552292 5.184097 38.78377 0.000041056 ***
+## Residuals  8  1.069333 0.133667                         
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD     emmean          SE df   lower.CL   upper.CL
+##  I   4.57333333 0.211081869  8 4.08657767 5.06008900
+##  MM  3.30000000 0.211081869  8 2.81324434 3.78675566
+##  M   1.77000000 0.211081869  8 1.28324434 2.25675566
+##  SM  1.92666667 0.211081869  8 1.43991100 2.41342233
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast     estimate          SE df t.ratio p.value
+##  I - MM    1.273333333 0.298514842  8   4.266  0.0117
+##  I - M     2.803333333 0.298514842  8   9.391  0.0001
+##  I - SM    2.646666667 0.298514842  8   8.866  0.0001
+##  MM - M    1.530000000 0.298514842  8   5.125  0.0040
+##  MM - SM   1.373333333 0.298514842  8   4.601  0.0076
+##  M - SM   -0.156666667 0.298514842  8  -0.525  0.9507
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fibra-dietaria-total" class="section level3">
+<h3>Fibra Dietaria Total</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## 
+## Call:
+## lm(formula = CONF ~ MAD, data = FDTdata, control = ctrl)
+## 
+## Coefficients:
+## (Intercept)        MADMM         MADM        MADSM  
+##     6.12000     -1.64333     -3.09000     -2.89667</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-10-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.9347513, p-value = 0.433201</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONF
+##           Df    Sum Sq  Mean Sq F value     Pr(&gt;F)    
+## MAD        3 18.255292 6.085097 22.9482 0.00027676 ***
+## Residuals  8  2.121333 0.265167                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD     emmean          SE df   lower.CL   upper.CL
+##  I   6.12000000 0.297302689  8 5.43441877 6.80558123
+##  MM  4.47666667 0.297302689  8 3.79108544 5.16224790
+##  M   3.03000000 0.297302689  8 2.34441877 3.71558123
+##  SM  3.22333333 0.297302689  8 2.53775210 3.90891456
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast     estimate          SE df t.ratio p.value
+##  I - MM    1.643333333 0.420449495  8   3.909  0.0188
+##  I - M     3.090000000 0.420449495  8   7.349  0.0004
+##  I - SM    2.896666667 0.420449495  8   6.889  0.0006
+##  MM - M    1.446666667 0.420449495  8   3.441  0.0358
+##  MM - SM   1.253333333 0.420449495  8   2.981  0.0683
+##  M - SM   -0.193333333 0.420449495  8  -0.460  0.9658
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="fibra-dietaria-en-peso-seco" class="section level2">
+<h2>Fibra Dietaria en peso seco</h2>
+<div id="fibra-dietaria-soluble-1" class="section level3">
+<h3>Fibra Dietaria Soluble</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## 
+## Call:
+## lm(formula = CONS ~ MAD, data = FDSdata, control = ctrl)
+## 
+## Coefficients:
+## (Intercept)        MADMM         MADM        MADSM  
+##    9.033592     0.640782     2.227031     1.404994</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-13-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-13-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.9084127, p-value = 0.203574</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONS
+##           Df   Sum Sq  Mean Sq F value  Pr(&gt;F)
+## MAD        3  8.34017 2.780057 0.50543 0.68926
+## Residuals  8 44.00297 5.500372</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD      emmean         SE df   lower.CL   upper.CL
+##  I    9.03359166 1.35405217  8 5.91114176 12.1560416
+##  MM   9.67437349 1.35405217  8 6.55192359 12.7968234
+##  M   11.26062281 1.35405217  8 8.13817291 14.3830727
+##  SM  10.43858579 1.35405217  8 7.31613589 13.5610357
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast     estimate         SE df t.ratio p.value
+##  I - MM   -0.640781835 1.91491894  8  -0.335  0.9861
+##  I - M    -2.227031152 1.91491894  8  -1.163  0.6644
+##  I - SM   -1.404994128 1.91491894  8  -0.734  0.8809
+##  MM - M   -1.586249316 1.91491894  8  -0.828  0.8398
+##  MM - SM  -0.764212293 1.91491894  8  -0.399  0.9770
+##  M - SM    0.822037024 1.91491894  8   0.429  0.9718
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fibra-dietaria-insoluble-1" class="section level3">
+<h3>Fibra Dietaria Insoluble</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## 
+## Call:
+## lm(formula = CONS ~ MAD, data = FDIdata, control = ctrl)
+## 
+## Coefficients:
+## (Intercept)        MADMM         MADM        MADSM  
+##     26.7114       0.4207     -10.8929     -11.2011</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-16-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-16-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.959235, p-value = 0.772854</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONS
+##           Df   Sum Sq   Mean Sq  F value    Pr(&gt;F)   
+## MAD        3 380.5920 126.86401 14.89503 0.0012262 **
+## Residuals  8  68.1376   8.51721                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD     emmean         SE df   lower.CL   upper.CL
+##  I   26.7113960 1.68495356  8 22.8258862 30.5969059
+##  MM  27.1320956 1.68495356  8 23.2465858 31.0176055
+##  M   15.8184939 1.68495356  8 11.9329841 19.7040038
+##  SM  15.5102894 1.68495356  8 11.6247795 19.3957993
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast    estimate         SE df t.ratio p.value
+##  I - MM   -0.42069960 2.38288417  8  -0.177  0.9979
+##  I - M    10.89290208 2.38288417  8   4.571  0.0079
+##  I - SM   11.20110661 2.38288417  8   4.701  0.0067
+##  MM - M   11.31360169 2.38288417  8   4.748  0.0063
+##  MM - SM  11.62180621 2.38288417  8   4.877  0.0054
+##  M - SM    0.30820453 2.38288417  8   0.129  0.9992
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-18-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fibra-dietaria-total-1" class="section level3">
+<h3>Fibra Dietaria Total</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## 
+## Call:
+## lm(formula = CONS ~ MAD, data = FDTdata, control = ctrl)
+## 
+## Coefficients:
+## (Intercept)        MADMM         MADM        MADSM  
+##    35.74499      1.06148     -8.66587     -9.79611</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-19-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-19-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.9079237, p-value = 0.200651</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONS
+##           Df   Sum Sq  Mean Sq F value   Pr(&gt;F)  
+## MAD        3 289.4805 96.49351 6.51122 0.015359 *
+## Residuals  8 118.5566 14.81957                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD     emmean         SE df   lower.CL   upper.CL
+##  I   35.7449877 2.22257906  8 30.6197112 40.8702642
+##  MM  36.8064691 2.22257906  8 31.6811926 41.9317456
+##  M   27.0791168 2.22257906  8 21.9538402 32.2043933
+##  SM  25.9488752 2.22257906  8 20.8235987 31.0741517
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast    estimate         SE df t.ratio p.value
+##  I - MM   -1.06148144 3.14320145  8  -0.338  0.9858
+##  I - M     8.66587093 3.14320145  8   2.757  0.0937
+##  I - SM    9.79611248 3.14320145  8   3.117  0.0564
+##  MM - M    9.72735237 3.14320145  8   3.095  0.0582
+##  MM - SM  10.85759392 3.14320145  8   3.454  0.0351
+##  M - SM    1.13024155 3.14320145  8   0.360  0.9829
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-21-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>Conclusiones</p>
+<p>Hay diferencias significativas.</p>
+</div>
+<div id="fibra-dietaria-insolublesoluble" class="section level3">
+<h3>Fibra Dietaria Insoluble/Soluble</h3>
+<p>Modelo y supuestos</p>
+<pre><code>## Generalized least squares fit by REML
+##   Model: CONS ~ MAD 
+##   Data: IDdata 
+##   Log-restricted-likelihood: 5.63080495
+## 
+## Coefficients:
+## (Intercept)       MADMM        MADM       MADSM 
+## 0.337176961 0.020741645 0.376869556 0.379372062 
+## 
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | MAD 
+##  Parameter estimates:
+##           I          MM           M          SM 
+## 1.000000000 0.144364748 1.395329799 2.676512435 
+## Degrees of freedom: 12 total; 8 residual
+## Residual standard error: 0.106139551</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-22-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-22-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.965062, p-value = 0.852871</code></pre>
+<p>Anova</p>
+<pre><code>## Denom. DF: 8 
+##             numDF     F-value p-value
+## (Intercept)     1 1733.963078  &lt;.0001
+## MAD             3    7.333655   0.011</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD      emmean           SE df    lower.CL    upper.CL
+##  I   0.337176961 0.0612796986  2 0.073464638 0.600889283
+##  MM  0.357918606 0.0088466283  2 0.319856982 0.395980230
+##  M   0.714046517 0.0855053896  2 0.346364784 1.081728249
+##  SM  0.716549022 0.1640158754  2 0.010983030 1.422115015
+## 
+## Degrees-of-freedom method: satterthwaite 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast     estimate           SE   df t.ratio p.value
+##  I - MM   -0.020741645 0.0619149763 2.08  -0.335  0.9839
+##  I - M    -0.376869556 0.1051968303 3.63  -3.583  0.0844
+##  I - SM   -0.379372062 0.1750897165 2.55  -2.167  0.3302
+##  MM - M   -0.356127911 0.0859618199 2.04  -4.143  0.1263
+##  MM - SM  -0.358630417 0.1642542852 2.01  -2.183  0.3607
+##  M - SM   -0.002502506 0.1849658861 3.01  -0.014  1.0000
+## 
+## Degrees-of-freedom method: satterthwaite 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-24-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fibra-dietaria-solubletotal" class="section level3">
+<h3>Fibra Dietaria Soluble/Total %</h3>
+<p>Modelo y supuestos
+<img src="madFiber_files/figure-html/unnamed-chunk-25-1.png" width="960" style="display: block; margin: auto;" /><img src="madFiber_files/figure-html/unnamed-chunk-25-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  e
+## W = 0.9850781, p-value = 0.9966</code></pre>
+<p>Anova</p>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: CONS
+##           Df   Sum Sq   Mean Sq F value   Pr(&gt;F)  
+## MAD        3 712.0535 237.35116 5.83595 0.020596 *
+## Residuals  8 325.3642  40.67053                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Test de Tukey</p>
+<pre><code>## $emmeans
+##  MAD     emmean        SE df   lower.CL   upper.CL
+##  I   75.0873682 3.6819618  8 66.5967490 83.5779873
+##  MM  73.6484073 3.6819618  8 65.1577881 82.1390264
+##  M   58.6434249 3.6819618  8 50.1528058 67.1340441
+##  SM  59.3641120 3.6819618  8 50.8734929 67.8547312
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast    estimate         SE df t.ratio p.value
+##  I - MM    1.43896089 5.20708032  8   0.276  0.9921
+##  I - M    16.44394324 5.20708032  8   3.158  0.0532
+##  I - SM   15.72325617 5.20708032  8   3.020  0.0647
+##  MM - M   15.00498235 5.20708032  8   2.882  0.0786
+##  MM - SM  14.28429528 5.20708032  8   2.743  0.0956
+##  M - SM   -0.72068707 5.20708032  8  -0.138  0.9990
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<p><img src="madFiber_files/figure-html/unnamed-chunk-27-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

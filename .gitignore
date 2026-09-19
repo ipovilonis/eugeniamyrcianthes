@@ -1,6 +1,37 @@
+# R Environment & History
 .Rproj.user
 .Rhistory
 .RData
+.RDataTmp*
 .Ruserdata
-Contact.html
-img_fondo.jpg
+*.RDataTmp*
+
+# R Markdown / Knitr intermediates
+*.log
+*.tex
+*.synctex.gz
+
+# Microsoft Office temporary lock files
+~$*.xlsx
+~$*.docx
+~$*.pptx
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database temporary journal/WAL files
+*.db-journal
+*.db-wal
+*.db-shm
+
+# OS generated files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.DS_Store

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Morphological</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+  <link rel="icon" type="image/png" href="fruto.jpg"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Inicio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">I Introducción</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    II Sitios
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="II_Phenotypes2.html">Fenotipos</a>
+    </li>
+    <li>
+      <a href="II_maps1.html">Mapas</a>
+    </li>
+    <li>
+      <a href="II_ER_Climate.html">Clima</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">ENTRE RÍOS</li>
+    <li class="divider"></li>
+    <li>
+      <a href="II_ER_SMN.html">MET ER</a>
+    </li>
+    <li>
+      <a href="II_ER_DL.html">DL ER</a>
+    </li>
+    <li>
+      <a href="II_ER_Soil.html">Suelos ER</a>
+    </li>
+    <li>
+      <a href="II_ER_Asociatedspecies.html">Especies asociadas</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">MORENO</li>
+    <li class="divider"></li>
+    <li>
+      <a href="II_M_inta.html">MET M</a>
+    </li>
+    <li>
+      <a href="II_M_Soil.html">Suelos M</a>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    III Fenología
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="III_Flowers.html">Fenología</a>
+    </li>
+    <li>
+      <a href="III_Yield.html">Rendimiento</a>
+    </li>
+    <li>
+      <a href="III_Polinization.html">Polinización</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    IV Maduración
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mad_resume.html">Tablas resumen</a>
+    </li>
+    <li>
+      <a href="madPhysical.html">Atributos físicos</a>
+    </li>
+    <li>
+      <a href="madAntioxidant.html">Actividad antioxidante</a>
+    </li>
+    <li>
+      <a href="madPhenols.html">Fenoles</a>
+    </li>
+    <li>
+      <a href="madSSyAcidez.html">Sólidos Solubles y Acidez</a>
+    </li>
+    <li>
+      <a href="madAcids.html">Ácidos orgánicos</a>
+    </li>
+    <li>
+      <a href="madCarbohydrates.html">Carbohidratos</a>
+    </li>
+    <li>
+      <a href="madFiber.html">Fibra dietaria</a>
+    </li>
+    <li>
+      <a href="madCations.html">Cationes</a>
+    </li>
+    <li>
+      <a href="mad_PCA.html">Multivariado</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    V Postcosecha
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Ensayo1.html">Ensayo 1</a>
+    </li>
+    <li>
+      <a href="Ensayo2.html">Ensayo 2</a>
+    </li>
+    <li>
+      <a href="Ensayo3.html">Ensayo 3</a>
+    </li>
+    <li>
+      <a href="Ensayo4.html">Ensayo 4</a>
+    </li>
+    <li>
+      <a href="Ensayo5.html">Ensayo 5</a>
+    </li>
+    <li>
+      <a href="Ensayo6.html">Ensayo 6</a>
+    </li>
+    <li>
+      <a href="Ensayo7.html">Ensayo 7</a>
+    </li>
+    <li>
+      <a href="Ensayo8.html">Ensayo 8</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    VI Variabilidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="V_Colorimetry.html">Colorimetría</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="V_flowers.html">Variables reproductivas</a>
+    </li>
+    <li>
+      <a href="V_Branches.html">Eficiencia reproductiva</a>
+    </li>
+    <li>
+      <a href="V_fruits.html">Frutos</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="V_correlations.html">Correlaciones</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Otros ensayos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Genetics.html">Extracción de ADN</a>
+    </li>
+    <li>
+      <a href="extraction_methods.html">Extracción química</a>
+    </li>
+    <li>
+      <a href="q2022_quimico.html">Variables químicas 2022</a>
+    </li>
+    <li>
+      <a href="secado.html">Secado ER</a>
+    </li>
+    <li>
+      <a href="dry_test.html">Pruebas de Secado</a>
+    </li>
+    <li>
+      <a href="calafate.html">Calafate</a>
+    </li>
+    <li>
+      <a href="microprop.html">Micropropagación</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="publications.html">Publicaciones</a>
+</li>
+<li>
+  <a href="bibliografia.html">Bibliografía</a>
+</li>
+<li>
+  <a href="about.html">Sobre el sitio</a>
+</li>
+<li>
+  <a href="FrutAr.html">FrutAr</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ipovilonis/ubajay.github.io">
+    <span class=" favicon.ico"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Morphological</h1>
+
+</div>
+
+
+<pre><code>## Error in `$&lt;-`:
+## ! Assigned data `as.numeric(fisico$pss)` must be compatible with
+##   existing data.
+## ✖ Existing data has 1166 rows.
+## ✖ Assigned data has 0 rows.
+## ℹ Only vectors of size 1 are recycled.
+## Caused by error in `vectbl_recycle_rhs_rows()`:
+## ! Can&#39;t recycle input of size 0 to size 1166.</code></pre>
+<div id="average-fruit" class="section level1">
+<h1>Average fruit</h1>
+<pre><code>##                          variable      means
+## 1              Fresh fruit weight 9.76132384
+## 2                Dry fruit weight         NA
+## 3                 Dry seed weight         NA
+## 4                 Dry pulp weight         NA
+## 5 Dry pulp/fresh fruit weight (%) 3.40740390</code></pre>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-3-1.png" width="1920" style="display: block; margin: auto;" /></p>
+</div>
+<div id="maturity-index" class="section level1">
+<h1>Maturity index</h1>
+<pre><code>##            site phenotype N indmad sd se ci
+## 1     Concordia       154 4 0.3611  0  0  0
+## 2     Concordia       156 4 0.4722  0  0  0
+## 3     Concordia       161 4 0.3889  0  0  0
+## 4     Concordia       171 4 0.6111  0  0  0
+## 5     Concordia       174 4 0.5278  0  0  0
+## 6     Concordia       175 4 0.1667  0  0  0
+## 7     Concordia       178 4 0.0909  0  0  0
+## 8     Concordia       185 4 0.3636  0  0  0
+## 9     Concordia       193 4 0.3889  0  0  0
+## 10    Concordia       197 4 0.4444  0  0  0
+## 11    Concordia       198 4 0.8889  0  0  0
+## 12    Concordia       199 4 0.7778  0  0  0
+## 13    Concordia       208 4 0.5278  0  0  0
+## 14 PN El Palmar       260 4 0.5278  0  0  0
+## 15 PN El Palmar       261 4 0.5185  0  0  0
+## 16 PN El Palmar       262 4 0.3333  0  0  0
+## 17 PN El Palmar       268 4 0.7778  0  0  0
+## 18 PN El Palmar       271 4 0.5556  0  0  0
+## 19 PN El Palmar       272 4 0.6667  0  0  0
+## 20 PN El Palmar       274 4 0.5000  0  0  0
+## 21 PN El Palmar       276 4 0.6389  0  0  0
+## 22 PN El Palmar       280 4 0.7778  0  0  0
+## 23 PN El Palmar       281 4 0.2222  0  0  0
+## 24 PN El Palmar       284 4 0.5185  0  0  0
+## 25 PN El Palmar       285 4 0.5833  0  0  0
+## 26 PN El Palmar       286 4 0.3889  0  0  0
+## 27 PN El Palmar       287 4 0.8056  0  0  0
+## 28 PN El Palmar       288 4 0.1667  0  0  0
+## 29 PN El Palmar       289 4 0.9048  0  0  0
+## 30 Gualeguaychú       305 4 0.8333  0  0  0
+## 31 Gualeguaychú       306 4 0.0000  0  0  0
+## 32 Gualeguaychú       321 4 0.0000  0  0  0
+## 33 Gualeguaychú       324 4 0.0333  0  0  0
+## 34 Gualeguaychú       325 4 0.0370  0  0  0
+## 35 Gualeguaychú       331 4 0.0278  0  0  0
+## 36 Gualeguaychú       337 4 0.0000  0  0  0
+## 37 Gualeguaychú       362 4 0.0000  0  0  0
+## 38 Gualeguaychú       363 4 0.2222  0  0  0</code></pre>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-4-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: (indmad) ~ 1 + (1 | site/phenotype)
+##    Data: dataindmad
+## 
+## REML criterion at convergence: -3710.1
+## 
+## Scaled residuals: 
+##               Min                1Q            Median                3Q 
+## -0.00000010864876 -0.00000006433150  0.00000000857753  0.00000004574685 
+##               Max 
+##  0.00000012008547 
+## 
+## Random effects:
+##  Groups         Name        Variance                Std.Dev.       
+##  phenotype:site (Intercept) 0.019193917614212241407 0.1385421149478
+##  site           (Intercept) 0.000003145550723225194 0.0017735700503
+##  Residual                   0.000000000000000376945 0.0000000194151
+## Number of obs: 152, groups:  phenotype:site, 38; site, 3
+## 
+## Fixed effects:
+##              Estimate Std. Error        df t value Pr(&gt;|t|)
+## (Intercept) 0.4230769  0.0225854 0.0028580 18.7323  0.98145
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## Model failed to converge with max|grad| = 0.407859 (tol = 0.002, component 1)
+## Model is nearly unidentifiable: very large eigenvalue
+##  - Rescale variables?</code></pre>
+<pre><code>## [1] 0.00000000000196355608</code></pre>
+<pre><code>## [1] 99.9836144</code></pre>
+<pre><code>## [1] 0.016385583</code></pre>
+<pre><code>## # Intraclass Correlation Coefficient
+## 
+##     Adjusted ICC: 1.000
+##   Unadjusted ICC: 1.000</code></pre>
+</div>
+<div id="pff-peso-fresco-del-fruto" class="section level1">
+<h1><strong>pff</strong> Peso fresco del fruto</h1>
+<pre><code>##   year site   N         pff         sd          se          ci
+## 1 2019 &lt;NA&gt; 411  9.67944428 6.27183053 0.309366586 0.608142575
+## 2 2021 &lt;NA&gt; 514 10.48482101 6.97811274 0.307791358 0.604686607
+## 3 2022 &lt;NA&gt; 241  8.35790041 5.10494153 0.328838191 0.647777575</code></pre>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-10-1.png" width="1920" style="display: block; margin: auto;" />
+The bars indicate standard deviation. The dashed red line indicates the
+mean.</p>
+</div>
+<div id="de-diámetro-ecuatorial" class="section level1">
+<h1><strong>de</strong> Diámetro ecuatorial</h1>
+<pre><code>##   year site   N         de          sd          se          ci
+## 1 2019 &lt;NA&gt; 411 27.3737275  7.43840343 0.366909383 0.721258298
+## 2 2021 &lt;NA&gt; 514 27.7115506 11.98208062 0.528506920 1.038304186
+## 3 2022 &lt;NA&gt; 241 24.9940249  6.32441809 0.407391582 0.802519714</code></pre>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-11-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p>The bars indicate standard deviation. The dashed red line indicates
+the mean.</p>
+<div id="pen" class="section level2">
+<h2>PEN</h2>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1199 @@
+---
+title: "Atributos de calidad"
+output:
+ html_document:
+   toc: true
+   toc_depth: 5
+   toc_float:
+     collapsed: false
+     smooth_scroll: true
+---
+
+El objetivo de este trabajo fue estudiar la evolución del tamaño y peso del fruto junto con los contenidos de sólidos solubles y acidez titulable total, junto con los patrones de acumulación de clorofilas, carotenoides, color_L y actividad antioxidante durante la maduración de los frutos de Hexachlamys edulis, para comprender el momento y las condiciones óptimas necesarios para obtener las máximas características nutracéuticas. Los frutos se cosecharon de plantas de H. edulis que crecen en el campo experimental de la Universidad de Morón (Moreno, Buenos Aires, 34°35'4.98" SL, 58°48'52.09" WL, 14 m.s.n.m.).
+
+```{r pressure, echo=FALSE, error=TRUE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("IMG_mat.jpg")
+```
+
+# Atributos físicos de calidad
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+# #setwd("C:/Users/um/Documents/ipovilonis/Doc/6 - Producción/web/ipovilonis.github.io")
+library(readxl)
+data<-read_excel("database.xlsx", sheet="IV madurez")
+data <- data[,-c(12)]
+data$madurez<-as.factor(data$madurez)
+data$madurez<-factor(data$madurez,levels=c("Inmaduro", "Medio Maduro", "Maduro", "SobreMaduro"))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# Crea un vector con las variables respuesta
+variables_respuesta <- c("PFF", "Dem", "DeM", "DP", "PSF", "H", "NS", "PSS", "PSSPSF", "PSSc")
+
+# Inicializa una lista para almacenar las tablas y otra lista para los gráficos
+tablas_list <- list()
+graficos_list <- list()
+
+library(dplyr)
+
+# Crea un bucle que recorre cada variable respuesta
+for(variable in variables_respuesta) {
+  # Crea la tabla resumen
+  assign(paste0("estad_mad_", variable), data %>%
+    dplyr::group_by(madurez) %>%
+    dplyr::summarise(n = n(),
+              Mean = mean(.data[[variable]]),
+              sd = sd(.data[[variable]]))
+  )
+  
+  # Agrega la tabla a la lista
+  tablas_list[[variable]] <- get(paste0("estad_mad_", variable))
+
+  # Crea el gráfico
+  library(ggplot2)
+  gg_plot <- ggplot(tablas_list[[variable]], aes(x = madurez, y = Mean, color = madurez)) +
+    scale_color_manual(values = c("palegreen4", "yellowgreen", "gold", "gold4")) +
+    stat_summary(fun = "mean", size = 6, geom = "point") +
+    geom_errorbar(aes(ymin = Mean - sd, ymax = Mean + sd), width = 0.2, position = position_dodge(0.9)) +
+    theme_classic() +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "none") +
+    theme(text = element_text(size = 15, color = 'black')) +
+    theme(axis.text = element_text(color = 'black'))
+
+  assign(paste0("mad_gg_", variable), gg_plot)
+  
+  # Agrega el gráfico a la lista
+  graficos_list[[variable]] <- get(paste0("mad_gg_", variable))
+}
+
+# acceder a las tablas y gráficos individuales con tablas_list$ y graficos_list$
+
+```
+
+## Peso fresco del fruto (PFF)
+
+Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(knitr)
+kable(tablas_list$PFF, format = "markdown")
+
+```
+
+Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$PFF +
+  ylab(" Peso fresco fruto (g) ")
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+#  Relacion media-varianza
+# estad$var=estad$sd^2#agrego varianza
+# vs<-ggplot(estad, aes(x=PFF, y=var))+geom_point(size=4) +   
+#   geom_smooth(method="lm", se = FALSE, color="red", linetype="dashed") + xlab("Media") +
+#   ylab("Varianza") +  ggtitle("Relaci?n media - varianza")+
+#   theme_classic()+
+#   theme(legend.title=element_blank())+
+#   theme(legend.position = "none" )
+# vs
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_PFF_mad<- lm(PFF ~ madurez ,data)
+
+library(nlme)
+# modelo_PFF_mad_var <- gls(PFF ~ madurez, weights=varIdent(form=~1|madurez), data = data)
+
+modelo_PFF_mad_gamma <- glm(PFF ~ madurez, data = data, family = Gamma(link = "log"))
+
+# modelo_PFF_mad_gamma_var <- glm(PFF ~ madurez, data = data, weights=varIdent(form=~1|madurez), family = Gamma(link = "log"))
+
+# por AIC se acepta _var pero por incumplimiento de normalidad se acepta _gamma
+
+```
+
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_PFF_mad, modelo_PFF_mad_var, modelo_PFF_mad_gamma)
+
+```
+
+ Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+PFF_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_PFF_mad_gamma),
+  "predichos" = predict(modelo_PFF_mad_gamma)))
+
+HV_PFF_mad<-ggplot(PFF_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_PFF_mad
+
+# QQ_PFF_mad<-ggplot(PFF_mad_ajuste) +
+#   aes(sample = residuos) +
+#   geom_qq(shape = 1, colour="white") +
+#   geom_qq_line(colour="white")+
+#   theme_classic()+
+#   labs(y="Sample Quantiles", x="Theoretical Quantiles")+
+#   theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+#   theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+#   theme(panel.grid.major.x = element_blank())+
+#   theme(text = element_text(size=10, color='white'))+
+#   theme(axis.text = element_text(color='white'))+
+#   theme(plot.background = element_rect(fill = "gray12"))+
+#   theme(panel.background = element_rect(fill = "gray12", color = "white"))
+# QQ_PFF_mad
+
+# e<-resid(modelo_PFF_mad_gamma) # residuos de pearson
+# r.est <- resid(modelo_PFF_mad_gamma, type="normalized") #residuos estandarizados
+# pre<-predict(modelo_PFF_mad_gamma) #predichos
+# alfai<-ranef(modelo_PFF_mad_var)$$'(Intercept)'
+# shapiro.test(e)
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_PFF_mad_gamma)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_PFF_mad<-emmeans(modelo_PFF_mad_gamma, pairwise ~ madurez, mode = "df.error", type= "response") #Tukey por default
+Comp_PFF_mad
+plot(Comp_PFF_mad, comparisons = TRUE) + theme_classic() + 
+  labs(x = "Peso fresco del fruto (g)", y ="madurez" )
+
+```
+
+## Peso seco de fruto (PSF)
+
+ Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$PSF, format = "markdown")
+
+```
+
+ Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$PSF+ 
+  ylab("Peso seco del fruto (g)")+
+  xlab("")+
+  ylim(0,13)+
+  scale_y_continuous(limits = c(1, 10), breaks = seq(1, 10, by = 1))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_PSF_mad<- lm(PSF ~ madurez ,data)
+
+modelo_PSF_mad_gamma <- glm(PSF ~ madurez, data = data, family = Gamma(link = "log"))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_PSF_mad,modelo_PSF_mad_gamma)
+
+```
+
+ Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+PSF_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_PSF_mad_gamma),
+  "predichos" = predict(modelo_PSF_mad_gamma)))
+
+HV_PSF_mad<-ggplot(PSF_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_PSF_mad
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_PSF_mad_gamma)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_PSF_mad<-emmeans(modelo_PSF_mad_gamma, pairwise ~ madurez, type = "response") 
+Comp_PSF_mad
+plot(Comp_PSF_mad, comparisons = TRUE) + theme_classic() + 
+  labs(x = "Peso seco del fruto (g)", y ="madurez" )
+```
+
+## Humedad
+
+ Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$H, format = "markdown")
+
+```
+
+ Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$H+ 
+  ylab("Humedad del fruto (%/100)")+
+  xlab("")+
+  ylim(0,1)+
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1))+
+  theme(legend.position = "none" )
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_H<- lm(H ~ madurez ,data)
+
+ library(glmmTMB)
+ modelo_H_beta <- glmmTMB(H ~ madurez, family = beta_family(), data = data)
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_H,modelo_H_beta)
+
+```
+
+ Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+H_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_H_beta),
+  "predichos" = predict(modelo_H_beta)))
+
+HV_H_mad<-ggplot(H_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_H_mad
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_H_beta)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+emm_options(opt.digits = FALSE)
+Comp2H<-emmeans(modelo_H_beta, pairwise ~ madurez, type="response") 
+Comp2H
+plot(Comp2H, comparisons = TRUE)+ 
+  labs(x = "Humedad", y ="madurez" )
+
+```
+
+## Diámetro ecuatorial menor
+
+ Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$Dem, format = "markdown")
+
+```
+
+ Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$Dem+ 
+  ylab("Diámetro ecuatorial menor (mm)")+
+  xlab("")+
+  ylim(0,13)+
+  scale_y_continuous(limits = c(0, 60), breaks = seq(0, 60, by = 5))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_Dem_mad<- lm(Dem ~ madurez ,data)
+
+modelo_Dem_mad_gamma <- glm(Dem ~ madurez, data = data, family = Gamma(link = "log"))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_Dem_mad,modelo_Dem_mad_gamma)
+
+```
+
+ Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+Dem_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_Dem_mad_gamma),
+  "predichos" = predict(modelo_Dem_mad_gamma)))
+
+HV_Dem_mad<-ggplot(Dem_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_Dem_mad
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_Dem_mad_gamma)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_Dem_mad<-emmeans(modelo_Dem_mad_gamma, pairwise ~ madurez, type = "response") 
+Comp_Dem_mad
+plot(Comp_Dem_mad, comparisons = TRUE)+ 
+  labs(x = "Diámetro ecuatorial menor (mm)", y ="madurez" )
+```
+
+## Diámetro ecuatorial mayor
+
+ Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$DeM, format = "markdown")
+
+```
+
+ Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$DeM+ 
+  ylab("Diámetro ecuatorial mayor (mm)")+
+  xlab("")+
+  ylim(0,13)+
+  scale_y_continuous(limits = c(0, 60), breaks = seq(0, 60, by = 5))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_DeM_mad<- lm(DeM ~ madurez ,data)
+
+modelo_DeM_mad_gamma <- glm(DeM ~ madurez, data = data, family = Gamma(link = "log"))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_DeM_mad,modelo_DeM_mad_gamma)
+
+```
+
+ Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+DeM_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_DeM_mad_gamma),
+  "predichos" = predict(modelo_DeM_mad_gamma)))
+
+HV_DeM_mad<-ggplot(DeM_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_DeM_mad
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# Comparación con anova y con Anova de library car
+
+# modelo_con_pred <- glm(DeM ~ madurez, data = data, family = Gamma(link = "log"))
+# modelo_sin_pred <- glm(DeM ~ 1, data = data, family = Gamma(link = "log"))
+# 
+# # Comparación de 
+# anova(modelo_sin_pred, modelo_con_pred, test = "Chisq")
+
+library(car)
+Anova(modelo_DeM_mad_gamma)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_DeM_mad<-emmeans(modelo_DeM_mad_gamma, pairwise ~ madurez, type = "response") 
+Comp_DeM_mad
+plot(Comp_DeM_mad, comparisons = TRUE)+ 
+  labs(x = "Diámetro ecuatorial mayor (mm)", y ="madurez" )
+```
+
+## Diámetro polar
+
+ Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$DP, format = "markdown")
+
+```
+
+ Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$DP+ 
+  ylab("Diámetro polar (mm)")+
+  xlab("")+
+  ylim(0,13)+
+  scale_y_continuous(limits = c(0, 60), breaks = seq(0, 60, by = 5))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_DP_mad<- lm(DP ~ madurez ,data)
+
+modelo_DP_mad_gamma <- glm(DP ~ madurez, data = data, family = Gamma(link = "log"))
+
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_DP_mad,modelo_DP_mad_gamma)
+
+```
+
+ Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+DP_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_DP_mad_gamma),
+  "predichos" = predict(modelo_DP_mad_gamma)))
+
+HV_DP_mad<-ggplot(DP_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_DP_mad
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_DP_mad_gamma)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_DP_mad<-emmeans(modelo_DP_mad_gamma, pairwise ~ madurez, type = "response")
+Comp_DP_mad
+plot(Comp_DP_mad, comparisons = TRUE)+ 
+  labs(x = "Diámetro polar (mm)", y ="madurez" )
+```
+
+## Peso seco semillas
+
+Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$PSS, format = "markdown")
+
+```
+
+Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$PSS+ 
+  ylab("Peso seco de semillas (g)")+
+  xlab("")+
+  ylim(0,13)+
+  scale_y_continuous(limits = c(0, 6), breaks = seq(0, 6, by = 1))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+modelo_PSS_mad_gamma <- glm(PSS ~ madurez, data = data, family = Gamma(link = "log"))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+
+# AIC(modelo_PSS_mad,modelo_PSS_mad_gamma)
+
+```
+
+Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+PSS_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_PSS_mad_gamma),
+  "predichos" = predict(modelo_PSS_mad_gamma)))
+
+HV_PSS_mad<-ggplot(PSS_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_PSS_mad
+
+```
+
+ Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_PSS_mad_gamma)
+
+```
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_PSS_mad<-emmeans(modelo_PSS_mad_gamma, pairwise ~ madurez, type = "response")
+Comp_PSS_mad
+plot(Comp_PSS_mad, comparisons = TRUE)+ 
+  labs(x = "Peso seco semillas (g)", y ="madurez" )
+```
+
+## PSSPSF
+
+Tabla descriptiva
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list$PSSPSF, format = "markdown")
+
+```
+
+Gráfico con desvío estándar
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list$PSSPSF +
+  ylab("Peso seco semilla/Peso seco fruto")
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_PSSPSF_mad<- lm(PSSPSF ~ madurez ,data)
+
+library(nlme)
+modelo_PSSPSF_mad_gamma <- glm(PSSPSF ~ madurez, data = data, family = Gamma(link = "log"))
+
+```
+
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_PSSPSF_mad, modelo_PSSPSF_mad_gamma)
+
+```
+
+Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+PSSPSF_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_PSSPSF_mad_gamma),
+  "predichos" = predict(modelo_PSSPSF_mad_gamma)))
+
+HV_PSSPSF_mad<-ggplot(PSSPSF_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_PSSPSF_mad
+
+```
+
+Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_PSSPSF_mad_gamma)
+
+```
+
+ Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_PSSPSF_mad<-emmeans(modelo_PSSPSF_mad_gamma, pairwise ~ madurez, type = "response")
+Comp_PSSPSF_mad
+plot(Comp_PSSPSF_mad, comparisons = TRUE)+ 
+  labs(x = "Peso seco semilla/Peso seco fruto", y ="madurez" )
+```
+
+## Color *L
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+# #setwd("C:/Users/um/Documents/ipovilonis/Doc/6 - Producción/web/ipovilonis.github.io")
+library(readxl)
+data<-read_excel("database.xlsx", sheet="mad_color")
+data$madurez<-factor(data$madurez,levels=c("Inmaduro", "Medio Maduro", "Maduro", "SobreMaduro"))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# Crea un vector con las variables respuesta
+variables_respuesta <- c("color_L", "color_a", "color_b")
+
+# Inicializa una lista para almacenar las tablas y otra lista para los gráficos
+tablas_list_color <- list()
+graficos_list_color <- list()
+
+library(dplyr)
+
+# Crea un bucle que recorre cada variable respuesta
+for(variable in variables_respuesta) {
+  # Crea la tabla resumen
+  assign(paste0("color_mad_", variable), data %>%
+    dplyr::group_by(madurez) %>%
+    dplyr::summarise(n = n(),
+              Mean = mean(.data[[variable]]),
+              sd = sd(.data[[variable]]))
+  )
+  
+  # Agrega la tabla a la lista
+  tablas_list_color[[variable]] <- get(paste0("color_mad_", variable))
+
+  # Crea el gráfico
+  library(ggplot2)
+  gg_plot <- ggplot(tablas_list_color[[variable]], aes(x = madurez, y = Mean, color = madurez)) +
+    scale_color_manual(values = c("palegreen4", "yellowgreen", "gold", "gold4")) +
+    stat_summary(fun = "mean", size = 6, geom = "point") +
+    geom_errorbar(aes(ymin = Mean - sd, ymax = Mean + sd), width = 0.2, position = position_dodge(0.9)) +
+    theme_classic() +
+    theme(legend.title = element_blank()) +
+    theme(legend.position = "none") +
+    theme(text = element_text(size = 15, color = 'black')) +
+    theme(axis.text = element_text(color = 'black'))
+
+  assign(paste0("mad_gg_color_", variable), gg_plot)
+  
+  # Agrega el gráfico a la lista
+  graficos_list_color[[variable]] <- get(paste0("mad_gg_color_", variable))
+}
+
+# acceder a las tablas y gráficos individuales con tablas_list$ y graficos_list$
+
+```
+
+ Tabla descriptiva color_L
+```{r  , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list_color$color_L, format = "markdown")
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+library(ggplot2)
+graficos_list_color$color_L+
+  theme_classic() +
+  theme(
+    legend.position = "bottom",
+    legend.background = element_rect(fill = "white"),
+    legend.title = element_blank(),
+    panel.grid.major.y = element_line(size = 0.05, color = 'black'),
+    panel.grid.major.x = element_blank(),
+    text = element_text(size = 20, color = 'black'),
+    plot.background = element_rect(fill = "white"),
+    panel.background = element_rect(fill = "white", color = "white"),
+    panel.border = element_rect(fill = "transparent"),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(angle = 0, hjust = 1, color = 'black')
+  )+
+  scale_color_manual(values = c("palegreen4","yellowgreen","gold","gold4"))+
+  scale_fill_manual(values = c("palegreen4","yellowgreen","gold","gold4"))+
+  # scale_y_continuous(breaks=seq(0, 50, 5))+
+  geom_text(aes(label = round(Mean,2)), vjust = -0.5, hjust = -0.1, size=5)+
+  theme(axis.text.y = element_text(angle = 0, hjust = 1, color='black'))+
+  scale_y_continuous(breaks = seq(65,75, 2), limits = c(65, 75))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+modelo_color_L_mad<- lm(color_L ~ madurez ,data)
+
+# library(nlme)
+# modelo_color_L_mad_var <- gls(color_L ~ madurez, weights=varIdent(form=~1|madurez), data = data)
+
+```
+
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# AIC(modelo_color_L_mad, modelo_color_L_mad_var, modelo_color_L_mad_gamma)
+
+```
+
+Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+color_L_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_color_L_mad),
+  "predichos" = predict(modelo_color_L_mad)))
+
+HV_color_L_mad<-ggplot(color_L_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_color_L_mad
+
+QQ_color_L_mad<-ggplot(color_L_mad_ajuste) +
+  aes(sample = residuos) +
+  geom_qq(shape = 1, colour="white") +
+  geom_qq_line(colour="white")+
+  theme_classic()+
+  labs(y="Sample Quantiles", x="Theoretical Quantiles")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+QQ_color_L_mad
+
+shapiro.test(color_L_mad_ajuste$residuos)
+
+```
+
+Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+anova(modelo_color_L_mad)
+
+```
+
+Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_color_L_mad<-emmeans(modelo_color_L_mad, pairwise ~ madurez, mode = "df.error", type= "response") #Tukey por default
+Comp_color_L_mad
+plot(Comp_color_L_mad, comparisons = TRUE) + theme_classic() + 
+  labs(x = "*L", y ="madurez" )
+
+```
+
+## Color *a
+ Tabla descriptiva color_a
+```{r  , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list_color$color_a, format = "markdown")
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+graficos_list_color$color_a+
+  theme_classic() +
+  theme(
+    legend.position = "bottom",
+    legend.background = element_rect(fill = "white"),
+    legend.title = element_blank(),
+    panel.grid.major.y = element_line(size = 0.05, color = 'black'),
+    panel.grid.major.x = element_blank(),
+    text = element_text(size = 20, color = 'black'),
+    plot.background = element_rect(fill = "white"),
+    panel.background = element_rect(fill = "white", color = "white"),
+    panel.border = element_rect(fill = "transparent"),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(angle = 0, hjust = 1, color = 'black')
+  )+
+  scale_color_manual(values = c("palegreen4","yellowgreen","gold","gold4"))+
+  scale_fill_manual(values = c("palegreen4","yellowgreen","gold","gold4"))+
+  # scale_y_continuous(breaks=seq(0, 50, 5))+
+  geom_text(aes(label = round(Mean,2)), vjust = -0.5, hjust = -0.1, size=5)+
+  theme(axis.text.y = element_text(angle = 0, hjust = 1, color='black'))+
+  scale_y_continuous(breaks = seq(0,10, 2), limits = c(0, 10))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# modelo_color_a_mad <- lm(color_a ~ madurez, data)
+
+library(nlme)
+modelo_color_a_mad_var <- gls(color_a ~ madurez, weights=varIdent(form= ~ 1|madurez), data=data)
+
+# AIC(modelo_color_a_mad_var,modelo_color_a_mad)
+
+```
+
+Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+color_a_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_color_a_mad_var),
+  "predichos" = predict(modelo_color_a_mad_var)))
+
+HV_color_a_mad<-ggplot(color_a_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_color_a_mad
+
+QQ_color_a_mad<-ggplot(color_a_mad_ajuste) +
+  aes(sample = residuos) +
+  geom_qq(shape = 1, colour="white") +
+  geom_qq_line(colour="white")+
+  theme_classic()+
+  labs(y="Sample Quantiles", x="Theoretical Quantiles")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+QQ_color_a_mad
+
+shapiro.test(color_a_mad_ajuste$residuos)
+
+library(car)
+leveneTest(data$color_a~data$madurez)
+
+```
+
+Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+anova(modelo_color_a_mad_var)
+
+```
+
+Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_color_a_mad<-emmeans(modelo_color_a_mad_var, pairwise ~ madurez, mode = "df.error", type= "response") #Tukey por default
+Comp_color_a_mad
+plot(Comp_color_a_mad, comparisons = TRUE) + theme_classic() + 
+  labs(x = "*a", y ="madurez" )
+
+```
+
+## Color *b
+ Tabla descriptiva color_b
+```{r  , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+kable(tablas_list_color$color_b, format = "markdown")
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+library(ggplot2)
+graficos_list_color$color_b+
+  theme_classic() +
+  theme(
+    legend.position = "bottom",
+    legend.background = element_rect(fill = "white"),
+    legend.title = element_blank(),
+    panel.grid.major.y = element_line(size = 0.05, color = 'black'),
+    panel.grid.major.x = element_blank(),
+    text = element_text(size = 20, color = 'black'),
+    plot.background = element_rect(fill = "white"),
+    panel.background = element_rect(fill = "white", color = "white"),
+    panel.border = element_rect(fill = "transparent"),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(angle = 0, hjust = 1, color = 'black')
+  )+
+  scale_color_manual(values = c("palegreen4","yellowgreen","gold","gold4"))+
+  scale_fill_manual(values = c("palegreen4","yellowgreen","gold","gold4"))+
+  # scale_y_continuous(breaks=seq(0, 50, 5))+
+  geom_text(aes(label = round(Mean,2)), vjust = -0.5, hjust = -0.1, size=5)+
+  theme(axis.text.y = element_text(angle = 0, hjust = 1, color='black'))+
+  scale_y_continuous(breaks = seq(0,20, 2), limits = c(0, 14))
+
+```
+
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+modelo_color_b_mad <- lm(color_b ~ madurez, data)
+
+# library(nlme)
+# modelo_color_b_mad_var <- gls(color_b ~ madurez, weights=varIdent(form= ~ 1|madurez), data=data)
+
+# AIC(modelo_color_b_mad_var,modelo_color_b_mad)
+
+```
+
+Verificación de supuestos
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+color_b_mad_ajuste <- as.data.frame(cbind(
+  "residuos" = residuals(modelo_color_b_mad),
+  "predichos" = predict(modelo_color_b_mad)))
+
+HV_color_b_mad<-ggplot(color_b_mad_ajuste) +
+  aes(predichos, residuos) +
+  geom_hline(yintercept = 0, colour="white", size=2) +
+  geom_point(colour="white")+
+  theme_classic()+
+  labs(y="Residuals", x="Predicted values")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+HV_color_b_mad
+
+QQ_color_b_mad<-ggplot(color_b_mad_ajuste) +
+  aes(sample = residuos) +
+  geom_qq(shape = 1, colour="white") +
+  geom_qq_line(colour="white")+
+  theme_classic()+
+  labs(y="Sample Quantiles", x="Theoretical Quantiles")+
+  theme(legend.position = "bottom", legend.background = element_rect(fill = "gray12"))+
+  theme(panel.grid.major.y = element_line(size=0.05, color='white'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=10, color='white'))+
+  theme(axis.text = element_text(color='white'))+
+  theme(plot.background = element_rect(fill = "gray12"))+
+  theme(panel.background = element_rect(fill = "gray12", color = "white"))
+QQ_color_b_mad
+
+shapiro.test(color_b_mad_ajuste$residuos)
+
+```
+
+Anova
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+anova(modelo_color_b_mad)
+
+```
+
+Comparaciones a posteriori
+```{r, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+library(multcompView)
+Comp_color_b_mad<-emmeans(modelo_color_b_mad, pairwise ~ madurez, mode = "df.error", type= "response") #Tukey por default
+Comp_color_b_mad
+plot(Comp_color_b_mad, comparisons = TRUE) + theme_classic() + 
+  labs(x = "*b", y ="madurez" )
+
+```

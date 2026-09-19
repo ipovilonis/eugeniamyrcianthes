@@ -1,5 +1,5 @@
 name: "Visualización Web de Datos"
-output_dir: "."
+output_dir: "docs"
 
 navbar:
   title: "Inicio"

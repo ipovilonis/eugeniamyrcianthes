@@ -1,9 +1,9 @@
-name: "Visualización Web de Datos"
+name: "Tesis Doctoral - Hexachlamys edulis"
 output_dir: "docs"
 
 navbar:
-  title: "Inicio"
-  style: "background-color: yellow; color: black;"  # Agregar estilo para el fondo amarillo y texto negro
+  title: "Proyecto Ubajay"
+  type: inverse
   right:
     - href: https://github.com/ipovilonis/ubajay.github.io
       icon: favicon.ico
@@ -125,6 +125,7 @@ navbar:
       href: FrutAr.html
 output:
   html_document:
-    includes:
-      in_header: header.html
+    theme: flatly
+    toc: true
+    toc_float: true
     css: styles.css

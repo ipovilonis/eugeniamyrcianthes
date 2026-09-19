@@ -1,4 +1,4 @@
----
+﻿---
 title: "Publicaciones"
 ---
 
@@ -20,6 +20,9 @@ knitr::opts_chunk$set(error = TRUE)
 * [“Analysis of Associated Woody and Semi-woody Local Wild Species in Entre Ríos, Argentina: Exploring the Agricultural Potential of Hexachlamys edulis.”](https://www.mdpi.com/2071-1050/16/22/10029)
 
 # Presentaciones en eventos científicos
+
+* [Conferencia plenaria: Bio prospección de Eugenia myrcianthes "ubajay", frutal nativo de Entre Ríos. Dra. Miriam Elizabeth Arena, Laboratorio de Fisiología Vegetal. Instituto de Ciencias de la Vida, Universidad de Morón](https://sag.org.ar/wp-content/uploads/2026/07/PROGRAMA-CIENTIFICO_-Jornadas-Regionales-SAG-2026-vfinal.pdf)
+
 
 * [“Caracterización Físico-Química de diversos frutos subutilizados de Argentina para su valoración como alimentos funcionales”. Investigación, Ciencia y Universidad. ISSN 2525-1783. S.l., v. 3, n. 4, p. 51 · 1 feb. 2020](http://repositorio.umaza.edu.ar//handle/00261/1634)
 

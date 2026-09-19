@@ -1,4 +1,4 @@
-# Ecofisiología, Variabilidad y Calidad de Fruto en Ubajay (*Hexachlamys edulis* / *Eugenia involucrata*)
+# Ecofisiología, Variabilidad y Calidad de Fruto en Ubajay (*Hexachlamys edulis* / *Eugenia myrcianthes*)
 
 [![SQLite](https://img.shields.io/badge/Database-SQLite_3-003B57?logo=sqlite&logoColor=white)](data/database/ubajay_research.db)
 [![R](https://img.shields.io/badge/Language-R_4.x-276DC3?logo=r&logoColor=white)](scripts/query_examples.R)
@@ -12,9 +12,9 @@
 
 ## 📌 Descripción del Proyecto
 
-El **Ubajay** (*Hexachlamys edulis* (O. Berg) Kausel & D. Legrand, syn. *Eugenia involucrata* / *Myrcianthes pungens*, Myrtaceae) es un frutal nativo del Cono Sur sudamericano con un extraordinario potencial agroecológico, nutricional y biotecnológico. 
+El **Ubajay** (*Hexachlamys edulis* (O. Berg) Kausel & D. Legrand, syn. *Eugenia myrcianthes* Nied., Myrtaceae) es un frutal nativo del Cono Sur sudamericano con un extraordinario potencial agroecológico, nutricional y biotecnológico. 
 
-Este repositorio centraliza y estructura **más de 7 años de investigación experimental**, abarcando:
+Este repositorio centraliza y estructura **más de 6 años de investigación experimental**, abarcando:
 1. **Ecología y Caracterización de Sitios:** Climatología regional (Entre Ríos y Buenos Aires), dinámica de suelos, índices espectrales (NDVI/EVI) y comunidades vegetales asociadas.
 2. **Fenología y Biología Reproductiva:** Dinámica de floración, suma térmica acumulada ($GDD$), biología de polinización y modelos de predicción de rendimiento.
 3. **Bioquímica y Fisiología de Maduración:** Evolución de sólidos solubles ($^\circ\text{Brix}$), acidez titulable, ácidos orgánicos individuales, azúcares solubles, almidón, minerales (cationes), fibra dietaria y polifenoles con capacidad antioxidante.

@@ -1,0 +1,438 @@
+---
+title: "Ensayos de micropropagación"
+---
+
+# Hormonas
+
+### Encabezado de la base de datos
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+#Load library
+library(readxl)
+
+#Create object "db_met_mor" which contains climate data
+microprop <- read_excel("database.xlsx", sheet = "microprop")
+
+microprop$explanto <- as.factor(microprop$explanto)
+microprop$antioxidante <- as.factor(microprop$antioxidante)
+# 
+microprop$hormona <- as.factor(microprop$hormona)
+# microprop$hormona <- as.numeric(microprop$hormona)
+
+head(microprop)
+
+```
+
+### Tabla resumen
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(dplyr)
+tabla_microprop <- microprop %>%
+  dplyr::group_by(hormona, explanto) %>%
+  dplyr::summarise(n = n(),
+                   Mean_supervivencia = mean(supervivencia),
+                   sd_supervivencia = sd(supervivencia),
+                   SEM_supervivencia = sd_supervivencia / sqrt(n))
+tabla_microprop
+
+```
+
+### Gráfico de barras
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(ggplot2)
+gg_microprop <- ggplot(tabla_microprop, aes(x=explanto, y=Mean_supervivencia , fill=hormona, width=.4)) +
+  stat_summary(fun = "mean", size = 1, geom = "bar", position=position_dodge(0.6), color="black") +
+  geom_errorbar(aes(ymin=Mean_supervivencia -SEM_supervivencia, ymax=Mean_supervivencia +SEM_supervivencia),
+                width=.1, position=position_dodge(.6), size=1)+
+  scale_fill_manual(values=c("#FF8","#FF9955","#FF2220"))+
+  labs(y="Supervivencia", x="")+
+  labs(x="", x="")+
+  # facet_grid(Conc~.)+
+  theme_classic()+
+  theme(panel.grid.major.y = element_line(size=0.05, color='black'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=12, color='black'))+
+  theme(axis.text = element_text(color='black'))+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "bottom")+
+  scale_y_continuous(limits = c(-0.2, 1.4), breaks = seq(-0.2, 1.4, 0.2))
+
+gg_microprop
+
+```
+
+### Chekeo de linealidad
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+microprop <- read_excel("database.xlsx", sheet = "microprop")
+microprop$explanto <- as.factor(microprop$explanto)
+microprop$antioxidante <- as.factor(microprop$antioxidante)
+microprop$hormona <- as.numeric(microprop$hormona)
+
+tabla_microprop_2 <- microprop %>%
+  dplyr::group_by(hormona, explanto) %>%
+  dplyr::summarise(n=n(),
+                   Mean_supervivencia = mean(supervivencia),
+                   sd_supervivencia = sd(supervivencia))
+
+gg_microprop_2 <- ggplot(tabla_microprop_2, aes(x=hormona, y=Mean_supervivencia, color=explanto, shape = explanto, width=.4)) +
+  geom_point(size=8)+
+  labs(y="Supervivencia", x="")+
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, 2))+
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2))+
+  scale_color_manual(values=c("green3","coral3"))+
+  theme_classic()+
+  theme(panel.grid.major.y = element_line(size=0.05, color='black'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=12, color='black'))+
+  theme(axis.text = element_text(color='black'))+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "bottom")
+gg_microprop_2
+
+microprop <- read_excel("database.xlsx", sheet = "microprop")
+microprop$explanto <- as.factor(microprop$explanto)
+microprop$antioxidante <- as.factor(microprop$antioxidante)
+microprop$hormona <- as.factor(microprop$hormona)
+
+```
+No hay linealidad --> comparación de medias
+
+### Frecuencias
+
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# Calcular la frecuencia de cada combinación de 'explanto' y 'antioxidante'
+frecuencias <- table(microprop$explanto, microprop$hormona)
+frecuencias
+
+```
+
+### Modelo factorial:
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(lmerTest)
+library(nlme)
+
+# Crear una columna de pesos inversamente proporcional a la frecuencia de cada categoría
+microprop$pesos <- with(microprop, 1 / (frecuencias[cbind(explanto, hormona)]))
+
+# Ajustar el modelo de regresión logística con los pesos
+modelo_hormona <- glm(supervivencia ~ explanto * hormona, 
+              data = microprop, 
+              family = binomial, 
+              weights = microprop$pesos)
+modelo_hormona$call
+
+```
+Los weights (pesos) están siendo utilizados para ajustar el impacto de cada observación en la estimación de los coeficientes del modelo. En este caso, los pesos son inversamente proporcionales a la frecuencia de cada combinación de las categorías de las variables explanto y hormona.
+
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+# Resumen del modelo
+# summary(modelo_hormona)
+```
+
+### El modelo en formato ANOVA se expresa como:
+
+$$
+logit(p_{ijk}) = \log\left(\frac{p_{ijk}}{1 - p_{ijk}}\right) = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij}
+$$
+
+- \(p_{ijk}\) es la probabilidad de supervivencia del explanto.
+- \(\mu\) es la media general.
+- \(\alpha_i\) es el efecto del tipo de explanto i.
+- \(\beta_j\) es el efecto del tipo de hormona j.
+- \((\alpha\beta)_{ij}\) es el efecto de interacción entre explanto y hormona.
+
+### Supuestos del Modelo Binomial
+
+Para el modelo de regresión logística binomial, los supuestos son:
+
+1. **Distribución de la Variable Respuesta:**
+
+   La variable de respuesta sigue una distribución binomial:
+
+   $$
+   Y_{ijk} \sim \text{Binomial}(n_{ijk}, p_{ijk})
+   $$
+
+2. **Relación Lineal en la Escala del Logit:**
+
+   La relación entre los predictores y el logit de la probabilidad de éxito es lineal:
+
+   $$
+   \text{logit}(p_{ijk}) = \log \left( \frac{p_{ijk}}{1 - p_{ijk}} \right) = \mu + \alpha_i + \beta_j + (\alpha \beta)_{ij}
+   $$
+
+3. **Independencia de las Observaciones:**
+
+   Los errores son independientes:
+
+   $$
+   \epsilon_{ijk} \sim \text{Independiente}
+   $$
+
+4. **Varianza de la Distribución Binomial:**
+
+   La varianza de la respuesta binomial es:
+
+   $$
+   \text{Var}(Y_{ijk}) = n_{ijk} p_{ijk} (1 - p_{ijk})
+   $$
+
+
+
+### Comparación de medias:
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_hormona)
+
+```
+Los resultados sugieren que, según los datos disponibles, no hay interacción y ni el tipo de explanto, ni el tipo de hormona afectan significativamente la supervivencia de los explantos.
+
+### Emmeans
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+# Estimaciones marginales de los efectos principales
+emmeans_results_1 <- emmeans(modelo_hormona, ~ explanto * hormona, type= "response")
+emmeans_results_1
+```
+
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+tabla_microprop_3 <- merge(tabla_microprop, as.data.frame(emmeans_results_1), by = c("explanto", "hormona"))
+
+tabla_microprop_3$explanto <- factor(tabla_microprop_3$explanto, levels = c("hoja", "segmento"), labels = c("Hoja", "Segmento"))
+
+# Supongamos que tienes un marco de datos con las letras asociado
+# Asegúrate de que el marco tenga las columnas `explanto`, `hormona`, y `letras`
+# Por ejemplo:
+tabla_microprop_3$letras <- c("a", "a", "a", "a", "a", "a")  # Letras de prueba
+
+# Crear el gráfico con las letras
+gg_microprop <- ggplot(tabla_microprop_3, aes(x = explanto, y = prob, fill = hormona, width = 0.4)) +
+  stat_summary(fun = "mean", size = 1, geom = "bar", position = position_dodge(0.6), color = "black") +
+  geom_errorbar(aes(ymin = Mean_supervivencia -SEM_supervivencia, ymax = Mean_supervivencia +SEM_supervivencia), 
+                width = 0.1, position = position_dodge(0.6), size = 1) +
+ geom_text(aes(label = letras, y = prob + 0.1),  
+            position = position_dodge2(width = 0.6, padding = 0.1),  # Mueve ligeramente a la derecha
+            hjust = -0.2, size = 8, color = "black", fontface = "bold") +
+  scale_fill_manual(values = c("#FF8", "#FF9955", "#FF2220")) +
+  labs(y = "Supervivencia", x = "") +
+  theme_classic() +
+  theme(
+    panel.grid.major.y = element_line(size = 0.05, color = 'black'),
+    panel.grid.major.x = element_blank(),
+    text = element_text(size = 12, color = 'black'),
+    axis.text = element_text(color = 'black'),
+    legend.position = "bottom"
+  ) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(-0, 1, 0.2))+
+  theme(
+    axis.text = element_text(size = 20),       # Tamaño de texto de los ejes
+    axis.title = element_text(size = 22),      # Tamaño de títulos de los ejes
+    plot.title = element_text(size = 24, face = "bold"), # Tamaño del título
+    legend.text = element_text(size = 20),     # Tamaño del texto de la leyenda (si aplica)
+    legend.title = element_blank()     # Tamaño del título de la leyenda (si aplica)
+  )
+
+# Mostrar el gráfico
+print(gg_microprop)
+
+
+# ggsave("gg_microprop.tiff", plot = gg_microprop, device = "tiff", width = 16, height = 8, units = "in", dpi = 300)
+
+```
+
+
+# Antioxidante
+
+### Tabla resumen
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(dplyr)
+tabla_microprop_antioxidante <- microprop %>%
+  dplyr::group_by(antioxidante, explanto) %>%
+  dplyr::summarise(n=n(),
+                   Mean_supervivencia = mean(supervivencia),
+                   sd_supervivencia = sd(supervivencia),
+                   SEM_supervivencia = sd_supervivencia / sqrt(n))
+tabla_microprop_antioxidante
+
+```
+
+### Gráfico de barras
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+
+
+gg_microprop_ao <- ggplot(tabla_microprop_antioxidante, aes(x=explanto, y=Mean_supervivencia , fill=antioxidante, width=.4)) +
+  stat_summary(fun = "mean", size = 1, geom = "bar", position=position_dodge(0.6), color="black") +
+  geom_errorbar(aes(ymin=Mean_supervivencia -SEM_supervivencia, ymax=Mean_supervivencia +SEM_supervivencia),
+                width=.1, position=position_dodge(.6), size=1)+
+  scale_fill_manual(values=c("#AF8","#AB2255"))+
+  labs(y="Supervivencia", x="")+
+  labs(x="", x="")+
+  # facet_grid(Conc~.)+
+  theme_classic()+
+  theme(panel.grid.major.y = element_line(size=0.05, color='black'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=12, color='black'))+
+  theme(axis.text = element_text(color='black'))+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "bottom")+
+  scale_y_continuous(limits = c(-0.2, 1.4), breaks = seq(-0.2, 1.4, 0.2))
+gg_microprop_ao
+
+```
+
+### Frecuencias
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+# Calcular la frecuencia de cada combinación de 'explanto' y 'antioxidante'
+frecuencias <- table(microprop$explanto, microprop$antioxidante)
+frecuencias
+```
+
+### Modelo factorial
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(lmerTest)
+library(nlme)
+
+# Crear una columna de pesos inversamente proporcional a la frecuencia de cada categoría
+microprop$pesos <- with(microprop, 1 / (frecuencias[cbind(explanto, antioxidante)]))
+
+# Ajustar el modelo de regresión logística con los pesos
+modelo_antioxidante <- glm(supervivencia ~ explanto * antioxidante, 
+              data = microprop, 
+              family = binomial, 
+              weights = microprop$pesos)
+
+modelo_antioxidante$call
+
+```
+
+
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+### Modelo de regresión logística:
+
+```
+
+
+<!-- $$ -->
+<!-- \text{logit}(P(Y = 1)) = \beta_0 + \beta_1 \cdot \text{explanto}_{hoja} + \beta_2 \cdot \text{antioxidante}_{pvpp} + \beta_3 \cdot (\text{explanto}_{hoja} \times \text{antioxidante}_{pvpp}) -->
+<!-- $$ -->
+
+<!-- * \(\text{logit}(P(Y=1))\): Es el logaritmo de las probabilidades (log-odds) de supervivencia (donde \(Y=1\) indica éxito o supervivencia). -->
+<!-- * \(\beta_0\): Intercepto del modelo, que representa el logit de la probabilidad de supervivencia cuando todas las variables son la referencia (por ejemplo, cuando `explanto` es "segmento" y `antioxidante` es "ácido cítrico"). -->
+<!-- * \(\beta_1\): Coeficiente del efecto de `explanto`, que mide la diferencia en log-odds de supervivencia cuando el explanto es "hoja" en comparación con "segmento". -->
+<!-- * \(\beta_2\): Coeficiente del efecto de `antioxidante`, que mide la diferencia en log-odds de supervivencia cuando el antioxidante es "PVPP" en comparación con "ácido cítrico". -->
+<!-- * \(\beta_3\): Coeficiente de interacción entre `explanto` y `antioxidante`, que mide cuánto cambia el efecto del explanto "hoja" en la probabilidad de supervivencia cuando el antioxidante es "PVPP". -->
+
+
+### El modelo en formato ANOVA se expresa como:
+
+$$
+E[Y_{ijk}] = \mu + \alpha_i + \beta_j + (\alpha \beta)_{ij}
+$$
+
+- \(E[Y_{ijk}]\) es la esperanza de la respuesta de supervivencia.
+- \(\mu\) es la media general de la respuesta.
+- \(\alpha_i\) es el efecto del nivel \(i\) del factor `explanto`.
+- \(\beta_j\) es el efecto del nivel \(j\) del factor `antioxidante`.
+- \((\alpha \beta)_{ij}\) es el efecto de interacción entre `explanto` e `antioxidante`.
+
+   La variable de respuesta sigue una distribución binomial:
+
+   $$
+   Y_{ijk} \sim \text{Binomial}(n_{ijk}, p_{ijk})
+   $$
+
+### Resumen del modelo
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(car)
+Anova(modelo_antioxidante)
+
+```
+No hay evidencia estadística suficiente para rechazar la hipótesis nula de que ninguno de los coeficientes es diferente de cero. En otras palabras, ni el tipo de explanto, ni el antioxidante utilizado, ni su interacción parecen tener un efecto significativo en la supervivencia de los explantos, según los datos disponibles.
+
+### Emmeans
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+# Estimaciones marginales de los efectos principales
+emmeans_results <- emmeans(modelo_antioxidante, ~ explanto * antioxidante, type= "response")
+emmeans_results
+
+```
+
+```{r  , echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+tabla_microprop_4 <- merge(tabla_microprop_antioxidante, as.data.frame(emmeans_results), by = c("explanto", "antioxidante"))
+
+# Supongamos que tienes un marco de datos con las letras asociado
+# Asegúrate de que el marco tenga las columnas `explanto`, `hormona`, y `letras`
+# Por ejemplo:
+tabla_microprop_4$letras <- c("a", "a", "a", "a")  # Letras de prueba
+
+tabla_microprop_4$antioxidante <- factor(tabla_microprop_4$antioxidante, levels = c("citrico","pvpp"), labels = c("Ácido cítrico", "PVPP") )
+
+# Crear el gráfico con las letras
+gg_microprop_ao <- ggplot(tabla_microprop_4, aes(x = explanto, y = prob, fill = antioxidante, width = 0.4)) +
+  stat_summary(fun = "mean", size = 1, geom = "bar", position = position_dodge(0.6), color = "black") +
+  geom_errorbar(aes(ymin = Mean_supervivencia -SEM_supervivencia, ymax = Mean_supervivencia +SEM_supervivencia), 
+                width = 0.1, position = position_dodge(0.6), size = 1) +
+ geom_text(aes(label = letras, y = prob + 0.1),  
+            position = position_dodge2(width = 0.6, padding = 0.1),  # Mueve ligeramente a la derecha
+            hjust = -0.2, size = 8, color = "black", fontface = "bold") +
+  scale_fill_manual(values = c("#AF8","#AB2255")) +
+  labs(y = "Supervivencia", x = "") +
+  theme_classic() +
+  theme(
+    panel.grid.major.y = element_line(size = 0.05, color = 'black'),
+    panel.grid.major.x = element_blank(),
+    text = element_text(size = 12, color = 'black'),
+    axis.text = element_text(color = 'black'),
+    legend.title = element_blank(),
+    legend.position = "bottom"
+  ) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2))+
+  theme(
+    axis.text = element_text(size = 20),       # Tamaño de texto de los ejes
+    axis.title = element_text(size = 22),      # Tamaño de títulos de los ejes
+    plot.title = element_text(size = 24, face = "bold"), # Tamaño del título
+    legend.text = element_text(size = 20),     # Tamaño del texto de la leyenda (si aplica)
+    legend.title = element_blank()     # Tamaño del título de la leyenda (si aplica)
+  )
+
+# Mostrar el gráfico
+print(gg_microprop_ao)
+
+# ggsave("gg_microprop_ao.tiff", plot = gg_microprop_ao, device = "tiff", width = 16, height = 8, units = "in", dpi = 300)
+
+```

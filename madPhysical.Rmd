@@ -9,6 +9,13 @@ output:
      smooth_scroll: true
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 El objetivo de este trabajo fue estudiar la evolución del tamaño y peso del fruto junto con los contenidos de sólidos solubles y acidez titulable total, junto con los patrones de acumulación de clorofilas, carotenoides, color_L y actividad antioxidante durante la maduración de los frutos de Hexachlamys edulis, para comprender el momento y las condiciones óptimas necesarios para obtener las máximas características nutracéuticas. Los frutos se cosecharon de plantas de H. edulis que crecen en el campo experimental de la Universidad de Morón (Moreno, Buenos Aires, 34°35'4.98" SL, 58°48'52.09" WL, 14 m.s.n.m.).
 
 ```{r pressure, echo=FALSE, error=TRUE, fig.cap="A caption", out.width = '100%'}

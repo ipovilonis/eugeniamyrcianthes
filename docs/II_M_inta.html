@@ -13,10 +13,10 @@
 
 <title>Datos meteorológicos 2018 a 2021 - Moreno</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,10 +29,12 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-  <link rel="icon" type="image/png" href="fruto.jpg"/>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -221,6 +223,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -230,9 +295,19 @@ $(document).ready(function () {
 <div class="container-fluid main-container">
 
 
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
@@ -240,7 +315,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Inicio</a>
+      <a class="navbar-brand" href="index.html">Proyecto Ubajay</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -487,9 +562,9 @@ Moreno</h1>
 ## 10     4 year  year2019 - year2020          0    0.884     0.707   116     1.25 
 ## # ℹ 26 more rows
 ## # ℹ 1 more variable: adj.p.value &lt;dbl&gt;</code></pre>
-<p><img src="II_M_inta_files/figure-html/unnamed-chunk-7-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="II_M_inta_files/figure-html/unnamed-chunk-8-1.png" alt="" width="1536" style="display: block; margin: auto;" /></p>
 <p><strong>Temperatura mínima y días con heladas</strong></p>
-<p><img src="II_M_inta_files/figure-html/unnamed-chunk-8-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="II_M_inta_files/figure-html/unnamed-chunk-9-1.png" alt="" width="1536" style="display: block; margin: auto;" /></p>
 <p><strong>Gráfico de precipitaciones mensuales acumuladas</strong></p>
 <pre><code>##    month            contrast       p.value
 ## 1      1 year2018 / year2019 0.23575126255
@@ -501,12 +576,12 @@ Moreno</h1>
 ## 7      2 year2018 / year2019 0.94467426248
 ## 8      2 year2018 / year2020 0.99071639029
 ## 9      2 year2018 / year2021 0.99983659854
-## 10     2 year2019 / year2020 0.82675457877
+## 10     2 year2019 / year2020 0.82675457878
 ## 11     2 year2019 / year2021 0.92127287774
-## 12     2 year2020 / year2021 0.99616899127
+## 12     2 year2020 / year2021 0.99616899128
 ## 13     3 year2018 / year2019 0.84304424858
 ## 14     3 year2018 / year2020 0.62671543196
-## 15     3 year2018 / year2021 0.89725692414
+## 15     3 year2018 / year2021 0.89725692413
 ## 16     3 year2019 / year2020 0.98110310997
 ## 17     3 year2019 / year2021 0.99929102898
 ## 18     3 year2020 / year2021 0.95747073283
@@ -516,7 +591,7 @@ Moreno</h1>
 ## 22     4 year2019 / year2020 0.18958144551
 ## 23     4 year2019 / year2021 0.47848652074
 ## 24     4 year2020 / year2021 0.93412614290
-## 25     5 year2018 / year2019 0.43684307487
+## 25     5 year2018 / year2019 0.43684307488
 ## 26     5 year2018 / year2020 0.00161162715
 ## 27     5 year2018 / year2021 0.63713884943
 ## 28     5 year2019 / year2020 0.07928882498
@@ -529,7 +604,7 @@ Moreno</h1>
 ## 35     6 year2019 / year2021 0.07644680070
 ## 36     6 year2020 / year2021 0.47598474019
 ## 37     7 year2018 / year2019 0.99086481839
-## 38     7 year2018 / year2020 0.23785970687
+## 38     7 year2018 / year2020 0.23785970686
 ## 39     7 year2018 / year2021 0.99172276891
 ## 40     7 year2019 / year2020 0.09938175501
 ## 41     7 year2019 / year2021 0.91443708823
@@ -546,28 +621,30 @@ Moreno</h1>
 ## 52     9 year2019 / year2020 0.99586271480
 ## 53     9 year2019 / year2021 0.75698483548
 ## 54     9 year2020 / year2021 0.62672879081
-## 55    10 year2018 / year2019 0.20800569602
+## 55    10 year2018 / year2019 0.20800569603
 ## 56    10 year2018 / year2020 0.68370273190
 ## 57    10 year2018 / year2021 0.88590612196
 ## 58    10 year2019 / year2020 0.82076667584
 ## 59    10 year2019 / year2021 0.04558360474
-## 60    10 year2020 / year2021 0.27006855510
-## 61    11 year2018 / year2019 0.46509871909
-## 62    11 year2018 / year2020 0.42266923432
+## 60    10 year2020 / year2021 0.27006855509
+## 61    11 year2018 / year2019 0.46509871910
+## 62    11 year2018 / year2020 0.42266923433
 ## 63    11 year2018 / year2021 0.32062624356
 ## 64    11 year2019 / year2020 0.99986387685
 ## 65    11 year2019 / year2021 0.99371288249
 ## 66    11 year2020 / year2021 0.99758725775
-## 67    12 year2018 / year2019 0.92846051032
-## 68    12 year2018 / year2020 0.05492690280
+## 67    12 year2018 / year2019 0.92846051031
+## 68    12 year2018 / year2020 0.05492690281
 ## 69    12 year2018 / year2021 0.00251694867
-## 70    12 year2019 / year2020 0.20059043164
+## 70    12 year2019 / year2020 0.20059043165
 ## 71    12 year2019 / year2021 0.01382443997
 ## 72    12 year2020 / year2021 0.62735206771</code></pre>
-<p><img src="II_M_inta_files/figure-html/unnamed-chunk-9-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="II_M_inta_files/figure-html/unnamed-chunk-10-1.png" alt="" width="1536" style="display: block; margin: auto;" /></p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -600,6 +677,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

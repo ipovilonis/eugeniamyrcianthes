@@ -10,6 +10,13 @@ output:
      smooth_scroll: true
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 ## Variables respuesta:
 
 **TFS**: Total fruiting shoots per plant  
@@ -292,7 +299,7 @@ num_vars <- dt[, .SD, .SDcols = is.numeric]
 p_matrix <- calculate_p_values(num_vars)
 
 # Convertir la matriz de p-valores a formato largo
-p_long <- melt(p_matrix, varnames = c("Variable1", "Variable2"), value.name = "PValue")
+p_long <- reshape2::melt(p_matrix, varnames = c("Variable1", "Variable2"), value.name = "PValue")
 
 # Añadir los símbolos de significancia
 p_long$Significance <- cut(p_long$PValue, 
@@ -303,7 +310,7 @@ p_long$Significance <- cut(p_long$PValue,
 cor_matrix <- cor(num_vars)
 
 # Transforma la matriz de correlación a formato largo
-cor_long <- melt(cor_matrix, varnames = c("Variable1", "Variable2"), value.name = "Correlation")
+cor_long <- reshape2::melt(cor_matrix, varnames = c("Variable1", "Variable2"), value.name = "Correlation")
 
 # Convertir Variable1 y Variable2 a caracteres
 cor_long <- cor_long %>%

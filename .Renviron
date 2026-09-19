@@ -1,0 +1,7 @@
+# Overriding paths to avoid non-ASCII characters in 'C:\Users\Sofìa'
+TMPDIR=E:/TEMP
+TEMP=E:/TEMP
+TMP=E:/TEMP
+RENV_PATHS_ROOT=E:/RENV_CACHE
+RENV_PATHS_LIBRARY_ROOT=E:/RENV_CACHE/library
+R_USER=E:/TEMP

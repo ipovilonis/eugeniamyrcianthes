@@ -9,6 +9,13 @@ output:
      smooth_scroll: true
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 Respiración de los frutos MM a las 24, 48 y 120 horas
 
 ```{r setup, include=FALSE}

@@ -9,6 +9,13 @@ output:
      smooth_scroll: true
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 ## Carbohidratos en peso fresco
 
 ```{r, echo=FALSE, error=TRUE, include=FALSE}

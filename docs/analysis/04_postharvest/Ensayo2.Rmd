@@ -1,0 +1,153 @@
+---
+title: "Ensayo 2"
+output:
+ html_document:
+   toc: true
+   toc_depth: 5
+   toc_float:
+     collapsed: false
+     smooth_scroll: true
+---
+
+Respiración de los frutos MM a las 24, 48 y 120 horas
+
+```{r setup, include=FALSE}
+# Configuración inicial
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra) # Opcional, para más estilo
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+
+# Crear el data.frame con los datos
+datos <- data.frame(
+  Tiempo_horas = c("24", "48", "120", "ANOVA", "Tiempo"),
+  CO2_mg_kg_h = c("128,2 ± 36,7<sup>a</sup>", "115,7 ± 40,1<sup>a</sup>", 
+                  "172,6 ± 18,5<sup>a</sup>", "F", "1,6"),
+  p_valor = c("", "", "", "p-valor", "<0,332")
+)
+
+# Renderizar la tabla con kable
+kable(datos, 
+      col.names = c("Tiempo (horas)", "CO2 (mg/Kg·h)", ""), 
+      align = c("l", "c", "c"), 
+      escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = FALSE) %>%
+  pack_rows("ANOVA", 4, 5) # Agrupar la fila de ANOVA
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+#Essay 2
+library(readxl)
+datares <- read_excel("database.xlsx", sheet = "VI respiration")
+datares$site<-as.factor(datares$site)
+datares$time<-as.numeric(datares$time)
+datares$respiration<-datares$respiration*1.831 # ml a mg CO2
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(ggplot2)
+resp_barplot<-ggplot(data = datares, aes(x = time, y = respiration, color=site))+
+  geom_point(size=8)+
+  theme_classic()+
+  labs(y="mg CO2 / kg.h", x="Horas desde cosecha")+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "bottom")+
+  theme(panel.grid.major.y = element_line(size=0.5, color='black'))+
+  theme(text = element_text(size=30, color="black"))+
+  theme(axis.text = element_text(color="black"))+
+  theme(plot.background = element_rect(fill = "white"))+
+  theme(panel.background = element_rect(fill = "white", color = "white"))+
+  scale_color_manual(values=c("skyblue1", "skyblue4"))+
+  annotate("text", x = 125, y = 105, label = "+ 112%")+
+  annotate("text", x = 125, y = 92, label = "+ 11%")
+resp_barplot
+
+datares$time<-as.factor(datares$time)
+
+resp_barplot2<-ggplot(data = datares, aes(x = time, y = respiration, fill=site))+
+  geom_bar(stat = "identity", position = "dodge")+
+  theme_classic()+
+  labs(y="mg CO2 / kg.h", x="Horas desde cosecha")+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "bottom")+
+  theme(panel.grid.major.y = element_line(size=0.5, color='black'))+
+  theme(text = element_text(size=30, color="black"))+
+  theme(axis.text = element_text(color="black"))+
+  theme(plot.background = element_rect(fill = "white"))+
+  theme(panel.background = element_rect(fill = "white", color = "white"))+
+  scale_fill_manual(values=c("skyblue1", "skyblue4"))+
+  annotate("text", x = 2.8, y = 105, label = "+ 112%")+
+  annotate("text", x = 3.2, y = 92, label = "+ 11%")
+resp_barplot2
+
+resp_barplot2
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(Rmisc)
+estadac <- summarySE(datares, measurevar="respiration", groupvars=c("time"))
+estadac
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+datares$time <- as.factor(datares$time)
+mcm_clim <- lm(respiration ~ time, data=datares)
+
+# datares$time <- as.numeric(datares$time)
+# mr_clim <- lm(respiration ~ time, data=datares)
+# 
+# mr_clim2 <- lm(respiration ~ time + time^2, data=datares)
+# 
+# 
+# anova(mcm_clim, mr_clim, mr_clim2)
+# AIC(mcm_clim, mr_clim, mr_clim2)
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+anova(mcm_clim)
+
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(dplyr)
+Pampa_Azul <- filter(datares, datares$site == "pampa_azul") 
+((100*max(Pampa_Azul$respiration))/min(Pampa_Azul$respiration))-100
+
+san_carlos <- filter(datares, datares$site == "san_carlos") 
+((100*max(san_carlos$respiration))/min(san_carlos$respiration))-100
+
+```
+
+```{r  , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(emmeans)
+comp_resp6<-emmeans(mcm_clim, pairwise ~ time)
+comp_resp6
+plot(comp_resp6, comparisons = TRUE)+ 
+  labs(x = expression(log("mg CO"[2]*"/Kg.h")) , y ="" )
+
+```
+
+No existen evidencias para rechazar la hipótesis nula.

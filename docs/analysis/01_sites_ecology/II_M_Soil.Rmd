@@ -1,0 +1,8 @@
+---
+title: "Análisis de Suelo - Moreno"
+
+---
+
+```{r pressure, echo=FALSE, fig.cap="Suelo Moreno", out.width = '100%'}
+knitr::include_graphics("suelo_moreno.jpg")
+```

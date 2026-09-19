@@ -9,6 +9,13 @@ output:
       smooth_scroll: yes
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 # Acidos orgánicos en peso fresco
 
 ```{r, echo=FALSE, error=TRUE, include=FALSE}

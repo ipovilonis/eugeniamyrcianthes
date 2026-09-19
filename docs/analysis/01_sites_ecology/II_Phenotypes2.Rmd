@@ -1,0 +1,38 @@
+---
+title: "Fenotipos: caracterización"
+output: html_document
+---
+
+Aquí tienes la explicación: 
+
+### 🌿 Explorador de Fenotipos de *Hexachlamys edulis*
+
+Esta aplicación interactiva te permite explorar las características morfológicas, fisicoquímicas y geográficas de distintos fenotipos de *Hexachlamys edulis* (ubajay), una especie frutal nativa del noreste argentino.
+
+#### ¿Qué podés hacer?
+
+🔍 **Seleccionar un fenotipo**
+Elegí un número de fenotipo del menú desplegable para ver su información detallada.
+
+📷 **Ver su imagen**
+Se muestra una fotografía representativa del árbol correspondiente.
+
+📋 **Resumen descriptivo**
+Abajo de la imagen encontrarás los datos principales del árbol y sus frutos.
+
+📌 **Ubicación geográfica**
+Un mapa interactivo te muestra el sitio exacto donde fue identificado el fenotipo.
+
+📊 **Radar de características**
+El gráfico tipo “spider chart” resume visualmente distintas variables cuantitativas normalizadas, facilitando la comparación entre fenotipos.
+
+ℹ️ **Significado de abreviaturas**
+Incluye un botón de ayuda con las abreviaturas utilizadas y su significado completo.
+
+<div style="text-align:center;">
+  <iframe src="https://ipovilonis.shinyapps.io/fenotipos_app/" 
+          width="100%" 
+          height="600px" 
+          style="border: none; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  </iframe>
+</div>

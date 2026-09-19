@@ -2,6 +2,13 @@
 title: "Mapas"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 ```{r, warning = FALSE, message = FALSE, echo=FALSE, error=TRUE, fig.align='center', fig.asp=0.8, fig.width=24, fig.height=16}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
 

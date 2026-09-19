@@ -13,10 +13,10 @@
 
 <title>Variables frutos</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -35,15 +35,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/plotly-binding-4.12.1/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-  <link rel="icon" type="image/png" href="fruto.jpg"/>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -322,7 +321,7 @@ div.tocify {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
@@ -330,7 +329,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Inicio</a>
+      <a class="navbar-brand" href="index.html">Proyecto Ubajay</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -698,12 +697,12 @@ años 2019, 2021 y 2022.</p>
 </div>
 <div id="peso-fresco-del-fruto" class="section level2">
 <h2>Peso Fresco del Fruto</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-14-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-15-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <pre><code>##   Component            r
-## 1      Year  0.309006748
-## 2      Site  1.605946310
-## 3 Phenotype 19.367950258
-## 4  Residual 78.717096683
+## 1      Year  0.649338545
+## 2      Site  3.374692773
+## 3 Phenotype 40.699294449
+## 4  Residual 55.276674234
 ##                                                                   p_value
 ## 1 0.113034565942156786655381495165784144774079322814941406250000000000000
 ## 2 0.113607107270969759360568218653497751802206039428710937500000000000000
@@ -712,11 +711,11 @@ años 2019, 2021 y 2022.</p>
 </div>
 <div id="dpf" class="section level2">
 <h2>DPF</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-16-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-17-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -724,39 +723,39 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.009
-## SE = 0.008
-## CI = [0, 0.014]
+## SE = 0.006
+## CI = [0.002, 0.013]
 ## P  = 0.000358 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.096
-## SE = 0.124
-## CI = [0.031, 0.266]
+## SE = 0.146
+## CI = [0.005, 0.28]
 ## P  = 0.0265 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.435
-## SE = 0.057
-## CI = [0.379, 0.472]
+## SE = 0.013
+## CI = [0.428, 0.449]
 ## P  = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000142 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.46
-## SE = 0.072
-## CI = [0.352, 0.483]
+## SE = 0.131
+## CI = [0.29, 0.533]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="dmaf" class="section level2">
 <h2>DMAF</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-18-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-19-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -764,39 +763,39 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.006
-## SE = 0.004
-## CI = [0, 0.009]
+## SE = 0
+## CI = [0, 0.001]
 ## P  = 0.0701 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.077
-## SE = 0.057
-## CI = [0.04, 0.143]
+## SE = 0.076
+## CI = [0.001, 0.131]
 ## P  = 0.0143 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.267
-## SE = 0.008
-## CI = [0.239, 0.254]
+## SE = 0.057
+## CI = [0.19, 0.292]
 ## P  = 0.0000000000000000000000000000000000000000000000000000000193 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.651
-## SE = 0.055
-## CI = [0.613, 0.709]
+## SE = 0.02
+## CI = [0.679, 0.715]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="dmafdpf" class="section level2">
 <h2>DMAF/DPF</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-20-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-21-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -804,81 +803,81 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.045
-## SE = 0.054
-## CI = [0.006, 0.106]
+## SE = 0.052
+## CI = [0.005, 0.096]
 ## P  = 0.0000000000396 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.01
-## SE = 0.046
-## CI = [0.001, 0.084]
+## SE = 0
+## CI = [0, 0]
 ## P  = 0.368 [LRT]
 ##      1 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.432
 ## SE = 0.021
-## CI = [0.322, 0.36]
+## CI = [0.395, 0.43]
 ## P  = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.512
-## SE = 0.04
-## CI = [0.531, 0.605]
+## SE = 0.073
+## CI = [0.474, 0.6]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="l" class="section level2">
 <h2>*L</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-22-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-23-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
-## Permutation Progress for phenotype :</code></pre>
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :</code></pre>
+<pre><code>## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
 ## Repeatability estimation using the lmm method 
 ## 
 ## Repeatability for year
 ## R  = 0.006
-## SE = 0.006
-## CI = [0, 0.012]
+## SE = 0.008
+## CI = [0, 0.014]
 ## P  = 0.0399 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.187
-## SE = 0.058
-## CI = [0.029, 0.139]
+## SE = 0.126
+## CI = [0.039, 0.256]
 ## P  = 0.00000548 [LRT]
-##      1 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.169
-## SE = 0.029
-## CI = [0.153, 0.209]
+## SE = 0.038
+## CI = [0.138, 0.204]
 ## P  = 0.00000000000000000000000000000000000000000000000000000063 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.638
-## SE = 0.047
-## CI = [0.68, 0.762]
+## SE = 0.083
+## CI = [0.606, 0.749]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="a" class="section level2">
 <h2>*a</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-24-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-25-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
 <pre><code>##   Component           r
-## 1      Year  1.55375164
-## 2      Site  2.22250773
-## 3 Phenotype 12.99557016
-## 4  Residual 83.22817047
+## 1      Year  7.99238433
+## 2      Site 11.43241653
+## 3 Phenotype 66.84825848
+## 4  Residual 13.72694065
 ##                                                                                                  p_value
 ## 1 0.0000000000000000000000000000000180033124544258060061724391331949846062343567609786987304687500000000
 ## 2 0.0050117072516728299394483947537537460448220372200012207031250000000000000000000000000000000000000000
@@ -887,65 +886,65 @@ Resumen</p>
 </div>
 <div id="b" class="section level2">
 <h2>*b</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-28-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-29-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
-## Permutation Progress for phenotype :</code></pre>
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :</code></pre>
+<pre><code>## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
 ## Repeatability estimation using the lmm method 
 ## 
 ## Repeatability for year
 ## R  = 0.001
-## SE = 0.001
-## CI = [0, 0.002]
+## SE = 0
+## CI = [0, 0.001]
 ## P  = 0.348 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.147
-## SE = 0.109
-## CI = [0.144, 0.351]
+## SE = 0.122
+## CI = [0.011, 0.212]
 ## P  = 0.000184 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.213
-## SE = 0.065
-## CI = [0.113, 0.23]
+## SE = 0.046
+## CI = [0.185, 0.263]
 ## P  = 0.0000000000000000000000000000000000000000000000000000000000000000000000125 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.639
 ## SE = 0.076
-## CI = [0.513, 0.65]
+## CI = [0.599, 0.727]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="im" class="section level2">
 <h2>IM</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-30-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-31-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <pre><code>##   Component            r
 ## 1      Year  0.425450641
 ## 2      Site  1.411226564
 ## 3 Phenotype  1.581683759
 ## 4  Residual 96.581639036
 ##                                                                     p_value
-## 1 0.00000000000000000020095883194197446243531995913045307133870664983987808
-## 2 0.00000185546932778184155759734763613266750326147302985191345214843750000
+## 1 0.00000000000000000020095883194193986790755668270236355965607799589633942
+## 2 0.00000185546932778074274419596867424786523770308122038841247558593750000
 ## 3 0.00000000000000000000000000000000000000000000000000000000000000140980604
 ## 4                                                                        NA</code></pre>
 </div>
 <div id="pen" class="section level2">
 <h2>PEN</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-33-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-34-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
 <pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -953,38 +952,40 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.077
-## SE = 0.113
-## CI = [0.031, 0.218]
+## SE = 0.03
+## CI = [0.011, 0.066]
 ## P  = 0.00000000000000196 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.257
-## SE = 0.232
-## CI = [0.109, 0.497]
+## SE = 0.092
+## CI = [0.063, 0.234]
 ## P  = 0.0000000449 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.147
-## SE = 0.07
-## CI = [0.093, 0.226]
+## SE = 0.06
+## CI = [0.078, 0.192]
 ## P  = 0.000000000000000000000000000000000000000000000285 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.519
-## SE = 0.135
-## CI = [0.367, 0.624]
+## SE = 0.042
+## CI = [0.621, 0.699]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="cla" class="section level2">
 <h2>CLa</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-35-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-36-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Error in eval(expr, envir, enclos): No se pudo ajustar el modelo completo para cloa.</code></pre>
-<pre><code>## Error in UseMethod(&quot;VarCorr&quot;): no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<pre><code>## Error:
+## ! No se pudo ajustar el modelo completo para cloa.</code></pre>
+<pre><code>## Error in `UseMethod()`:
+## ! no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
 <pre><code>##   Component   r p_value
 ## 1      Year 100      NA
 ## 2      Site 100      NA
@@ -993,10 +994,12 @@ Resumen</p>
 </div>
 <div id="clb" class="section level2">
 <h2>CLb</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-38-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-39-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Error in eval(expr, envir, enclos): No se pudo ajustar el modelo completo para clob.</code></pre>
-<pre><code>## Error in UseMethod(&quot;VarCorr&quot;): no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<pre><code>## Error:
+## ! No se pudo ajustar el modelo completo para clob.</code></pre>
+<pre><code>## Error in `UseMethod()`:
+## ! no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
 <pre><code>##   Component   r p_value
 ## 1      Year 100      NA
 ## 2      Site 100      NA
@@ -1005,10 +1008,12 @@ Resumen</p>
 </div>
 <div id="ctc" class="section level2">
 <h2>CTC</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-41-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-42-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Error in eval(expr, envir, enclos): No se pudo ajustar el modelo completo para caro.</code></pre>
-<pre><code>## Error in UseMethod(&quot;VarCorr&quot;): no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<pre><code>## Error:
+## ! No se pudo ajustar el modelo completo para caro.</code></pre>
+<pre><code>## Error in `UseMethod()`:
+## ! no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
 <pre><code>##   Component   r p_value
 ## 1      Year 100      NA
 ## 2      Site 100      NA
@@ -1017,11 +1022,11 @@ Resumen</p>
 </div>
 <div id="att" class="section level2">
 <h2>ATT</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-44-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-45-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
 <pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -1029,39 +1034,39 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.357
-## SE = 0.188
-## CI = [0.015, 0.353]
+## SE = 0.151
+## CI = [0.166, 0.446]
 ## P  = 0.00000000000000805 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.086
-## SE = 0.002
-## CI = [0.094, 0.098]
+## SE = 0.06
+## CI = [0.03, 0.136]
 ## P  = 0.0183 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.153
-## SE = 0.053
-## CI = [0.143, 0.241]
+## SE = 0.064
+## CI = [0.092, 0.206]
 ## P  = 0.000105 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.404
-## SE = 0.141
-## CI = [0.408, 0.673]
+## SE = 0.047
+## CI = [0.431, 0.519]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="ss" class="section level2">
 <h2>SS</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-46-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-47-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -1069,38 +1074,38 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.07
-## SE = 0.052
-## CI = [0, 0.085]
+## SE = 0.038
+## CI = [0.04, 0.112]
 ## P  = 0.000575 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.091
-## SE = 0.15
-## CI = [0.001, 0.256]
+## SE = 0.044
+## CI = [0.002, 0.085]
 ## P  = 0.0514 [LRT]
-##      1 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.327
-## SE = 0.088
-## CI = [0.249, 0.417]
+## SE = 0.069
+## CI = [0.314, 0.429]
 ## P  = 0.00000000000515 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.512
-## SE = 0.051
-## CI = [0.49, 0.583]
+## SE = 0.012
+## CI = [0.511, 0.532]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
 </div>
 <div id="ssatt" class="section level2">
 <h2>SS/ATT</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-48-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-49-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
+<pre><code>## Bootstrap Progress:</code></pre>
+<pre><code>## Permutation Progress for year :
 ## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
@@ -1109,34 +1114,37 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.356
-## SE = 0.18
-## CI = [0.303, 0.639]
+## SE = 0.16
+## CI = [0.394, 0.672]
 ## P  = 0.00000000000000000427 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.182
-## SE = 0.13
-## CI = [0.008, 0.254]
+## SE = 0.032
+## CI = [0.002, 0.061]
 ## P  = 0.000415 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.177
-## SE = 0.026
-## CI = [0.112, 0.157]
+## SE = 0.104
+## CI = [0.111, 0.287]
 ## P  = 0.00000112 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.285
-## SE = 0.041
-## CI = [0.24, 0.317]
+## SE = 0.085
+## CI = [0.176, 0.316]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
-<pre><code>## Error in na.fail.default(structure(list(ratio = c(6.350806452, 6.911057692, : missing values in object</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): No se pudo ajustar el modelo completo para ratio.</code></pre>
-<pre><code>## Error in UseMethod(&quot;VarCorr&quot;): no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<pre><code>## Error in `na.fail.default()`:
+## ! missing values in object</code></pre>
+<pre><code>## Error:
+## ! No se pudo ajustar el modelo completo para ratio.</code></pre>
+<pre><code>## Error in `UseMethod()`:
+## ! no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
 <pre><code>##   Component   r p_value
 ## 1      Year 100      NA
 ## 2      Site 100      NA
@@ -1145,31 +1153,31 @@ Resumen</p>
 </div>
 <div id="dpph" class="section level2">
 <h2>DPPH</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-52-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-53-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
 <pre><code>##   Component             r                                          p_value
-## 1      Year  0.0189130830 0.0000000063003784011922079914477801132477452484
-## 2      Site  0.0295948342 0.0111273237321096712254542282494185201358050108
+## 1      Year  0.0189130830 0.0000000063003784012051120091459088801144616809
+## 2      Site  0.0295948342 0.0111273237321176370756559137475960596930235624
 ## 3 Phenotype  0.1189193628 0.0000000000000000000000000000000000000671384871
 ## 4  Residual 99.8325727200                                               NA</code></pre>
 <pre><code>##   Component            r                                      p_value
-## 1      Year  0.291177418 0.000003094484333379866749375031176327865978
-## 2      Site  0.547489737 0.010297108235678474261187709259957046015188
+## 1      Year  0.291177418 0.000003094484333380510494414944444585557903
+## 2      Site  0.547489737 0.010297108235680481336249414425765280611813
 ## 3 Phenotype  2.153247871 0.000000000000000000000000000000000472883184
 ## 4  Residual 97.008084974                                           NA</code></pre>
 <pre><code>##   Component              r                        p_value
-## 1      Year  0.00835655972 0.0000000989948673130157991932
-## 2      Site  0.00636299496 0.0547351940537780037865367433
+## 1      Year  0.00835655972 0.0000000989948673137842433643
+## 2      Site  0.00636299496 0.0547351940539510806171819013
 ## 3 Phenotype  0.03676631087 0.0000000000000000000215342632
 ## 4  Residual 99.94851413446                             NA</code></pre>
 </div>
 <div id="pt" class="section level2">
 <h2>PT</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-57-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-58-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
 <pre><code>## Bootstrap Progress:
-## Permutation Progress for year :
-## Permutation Progress for site :
+## Permutation Progress for year :</code></pre>
+<pre><code>## Permutation Progress for site :
 ## Permutation Progress for phenotype :</code></pre>
 <pre><code>## 
 ## 
@@ -1177,33 +1185,35 @@ Resumen</p>
 ## 
 ## Repeatability for year
 ## R  = 0.043
-## SE = 0.02
-## CI = [0.003, 0.041]
+## SE = 0.015
+## CI = [0.022, 0.05]
 ## P  = 0.0000374 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for site
 ## R  = 0.141
-## SE = 0.1
-## CI = [0.014, 0.195]
+## SE = 0.198
+## CI = [0.023, 0.376]
 ## P  = 0.00828 [LRT]
 ##      0.667 [Permutation]
 ## 
 ## Repeatability for phenotype
 ## R  = 0.416
-## SE = 0.104
-## CI = [0.376, 0.572]
+## SE = 0.162
+## CI = [0.247, 0.52]
 ## P  = 0.00000000000000000000000000000000000000903 [LRT]
-##      0.667 [Permutation]
+##      0.333 [Permutation]
 ## 
 ## Repeatability for Residual
 ## R  = 0.4
-## SE = 0.089
-## CI = [0.369, 0.522]
+## SE = 0.042
+## CI = [0.34, 0.418]
 ## P  = NA [LRT]
 ##      NA [Permutation]</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): No se pudo ajustar el modelo completo para fen.</code></pre>
-<pre><code>## Error in UseMethod(&quot;VarCorr&quot;): no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<pre><code>## Error:
+## ! No se pudo ajustar el modelo completo para fen.</code></pre>
+<pre><code>## Error in `UseMethod()`:
+## ! no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
 <pre><code>##   Component   r p_value
 ## 1      Year 100      NA
 ## 2      Site 100      NA
@@ -1212,17 +1222,20 @@ Resumen</p>
 </div>
 <div id="ctccl" class="section level2">
 <h2>CTC/CL</h2>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-60-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-61-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Resumen</p>
-<pre><code>## Error in eval(expr, envir, enclos): No se pudo ajustar el modelo completo para CTC_CL.</code></pre>
-<pre><code>## Error in UseMethod(&quot;VarCorr&quot;): no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
+<pre><code>## Error:
+## ! No se pudo ajustar el modelo completo para CTC_CL.</code></pre>
+<pre><code>## Error in `UseMethod()`:
+## ! no applicable method for &#39;VarCorr&#39; applied to an object of class &quot;NULL&quot;</code></pre>
 <pre><code>##   Component   r p_value
 ## 1      Year 100      NA
 ## 2      Site 100      NA
 ## 3 Phenotype 100      NA
 ## 4  Residual 100      NA</code></pre>
 <pre><code>## [1] 0.0239908372</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): objeto &#39;beta_CTC_CL&#39; no encontrado</code></pre>
+<pre><code>## Error:
+## ! objeto &#39;beta_CTC_CL&#39; no encontrado</code></pre>
 <pre><code>## [1] &quot;phenotype  -  154 : 0.0257070511455268&quot;
 ## [1] &quot;phenotype  -  156 : 0.0246619822493879&quot;
 ## [1] &quot;phenotype  -  161 : 0.0270033651233839&quot;
@@ -1414,16 +1427,16 @@ Resumen</p>
 ##       DPPH25          CTC 
 ##  2.698075407  0.151627679</code></pre>
 <p>Proporción de contribución de cada variable a PC1, PC2 y PC3
-<img src="V_fruits_files/figure-html/unnamed-chunk-77-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<img src="V_fruits_files/figure-html/unnamed-chunk-78-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <p>Biplots de PCA: CP1 VS CP2</p>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-79-1.png" width="2304" style="display: block; margin: auto;" /></p>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-80-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-80-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-81-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <p>Triplot:</p>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-413131674d472271f754" style="width:2304px;height:921.6px;"></div>
-<script type="application/json" data-for="htmlwidget-413131674d472271f754">{"x":{"visdat":{"249c559d6656":["function () ","plotlyVisDat"]},"cur_data":"249c559d6656","attrs":{"249c559d6656":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":10},"color":{},"colors":["coral1","burlywood2","palegreen4"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"PC1"},"yaxis":{"title":"PC2"},"zaxis":{"title":"PC3"}},"title":"PCA: Componentes Principales 1, 2 y 3","legend":{"title":{"text":"Sitios"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-2.0337844466922972,-1.5467796074703777,-1.4765545470696475,-3.1915543012263266,-0.61904981672805803,1.81574321842223,1.3772158453625918,1.4719823241605892,0.76661324838880274,0.095271233342145212,0.004040084736349446,-3.0577511657224372,-3.55092282832759,1.4591467434695304,0.54085713344177933,1.9745858085863157,2.1517933322757927,-3.5899476658858993,1.3418614410899048,3.2660066290054877,3.0805944902752218,1.2905255129910065,0.49300134937061724,3.1585580048196467,-3.2286709001881286,-3.4001641348998115,3.5633113673744652,-1.8341268074575534,-0.64502764443265814,-1.4762128027273029,-0.12792190195513853,0.46976651344423553,0.51921690022500189,-2.520190205997535,-2.0475393078258421,4.9430649368910347,5.6076453035912355,4.3019976807158695,1.867961849098889,-2.5158741696169278,2.4612158558478661,-1.6281135353045237,-0.30298326605603221,5.0813377654189944,-0.21541161013581503,0.0012029249385579477,0.48082698594031353],"y":[-0.35374066043064384,-0.31708067011623142,-1.6854458770017955,-0.1564170143359222,-0.43411292394930651,0.99555180457192238,1.0456883026256438,0.9843628803362614,0.88768614913682531,1.4598628120587755,0.93484196024124822,0.33965679823037825,-1.5399460894974606,1.1504315439691457,1.3760949079157272,1.9082394668677294,0.11678340240883209,2.5405042656804775,1.6926785968186235,1.0964790528101998,1.4893437754386956,1.6798188885969239,3.8813976611907073,1.4499715574954584,1.7724193772251273,1.8352879456702738,2.7069705691676158,2.7930858818579227,3.302252536443834,1.3654618915196959,2.5668804618554644,1.1282925244925206,-0.84192472529151852,2.2512085183344173,1.0946359118302751,2.1988103954361309,0.91685251103002652,0.65558615993021507,0.0326263648802948,0.95394569391333683,1.5683814427118272,1.7103246191106787,0.14355776532611983,1.9016065743098769,2.2911277494688909,2.5932426114513625,0.45563092511743025],"z":[-0.57904868859901282,-1.2560301337451123,-1.4250849546337359,0.92772592085153471,-1.7298252862226444,-0.10324065015435711,1.550206476546969,-0.075372760366486102,-0.31454265715777424,0.19057749081976028,-0.49024713528680797,-0.33811532580361925,-0.082136692968429542,0.24638776116143402,0.29597094291664844,-1.9803532285514358,-0.97746628605729147,0.83439634009667818,0.092568087455328935,-0.60074761254534004,-0.5043223376507493,-0.26672415116579862,0.65346694145593587,-0.52634598051514436,0.080224651942497435,0.48150457098282551,-0.27467294281665661,0.6167513590750312,-1.041555786278205,0.89397489450534762,0.29834364682455139,0.30166512577331117,-0.70715025329624137,0.23819532190082487,1.0125819053458296,3.623383049949283,3.3707358473080418,2.3671251050456963,0.29999138720964208,0.8198409129514832,1.798733783708286,0.067389527978268693,0.0075432710444780504,2.5931757562436411,2.0686898028912242,-0.3208755855687051,0.79067926742707606],"mode":"markers","marker":{"color":"rgba(255,114,86,1)","size":10,"line":{"color":"rgba(255,114,86,1)"}},"type":"scatter3d","name":"Concordia","textfont":{"color":"rgba(255,114,86,1)"},"error_y":{"color":"rgba(255,114,86,1)"},"error_x":{"color":"rgba(255,114,86,1)"},"line":{"color":"rgba(255,114,86,1)"},"frame":null},{"x":[-1.1883181850921061,-0.81886007340010936,1.1778547960828527,-1.1695823043572724,-1.9731446377466872,-2.5460975409898152,-0.77188104868434715,-3.3417036543006011,-0.91190015542580294,0.70311452482855874,-2.9396427063489976,-1.541762800162247,-0.50949986392501045,-1.3254504545521308,-0.43672725955931724,-4.9528301558766881,-2.7440538921968738,-3.4413777143601285,-2.2259277654745229,-1.4927569266219731,-3.2598748339839569,-3.669928431113044,-2.5264070584241427,0.30267788476623408,-4.0966433353140266,-1.3817831031024401,0.90811936917426217,-4.6845096890473688,-3.5077735074735528,-2.0655464509974744,-0.76354288243164037,-5.6560629651921523,-0.069714254581974694,-6.0136618017334325,-0.30601465287255591],"y":[-0.44723487375574039,0.72671260808886173,0.27391594822148185,0.34041000445431957,-0.32748504160631031,0.1479533303435098,0.77711863121248781,-1.2670086609625222,1.7587454029751177,0.694238544946855,-0.66535951251344794,-0.46970058303956014,0.65713872877591251,0.24434633450742835,-1.0960782346335027,-2.2944399963391762,-0.924873131672033,-0.17539354853710826,1.809905027651727,1.4378492001428023,1.9672213034561596,-1.3901919077438203,1.554427419622241,-0.79599424875511415,-0.73025213921208421,2.2905628860871574,1.8099896957022505,-0.81025358506718492,-0.35989115763804724,0.95516928621719477,-0.31256745182755169,1.7515101162936229,0.50538156918468302,-0.26299684689877945,-1.5742411568319878],"z":[-0.6158493868271212,-1.798249445700739,-2.2262259888351732,-1.7743663293065428,-0.74374355148065674,-0.11021202338357788,-0.83781280119381818,-0.85272777965735846,-1.0506103767782098,1.0900534378938675,0.60879150762073764,-0.012323857795111165,-0.93532902202369228,-2.10288357793134,-1.6558749993715352,1.3109880400034692,-0.29679910169145046,0.31690904392111857,-1.2759636894911592,-0.78005570636427901,-2.4040684813337458,0.18708943787364526,-0.90255847611033924,-0.88632788864981227,-0.59904089894877854,-0.95767759619149873,0.89727452486530279,0.45099068785543234,1.7513393713746228,-1.0127060856498049,-1.9771710999583125,0.78827345368007073,0.26443000531793054,4.4891888278093681,0.78145315684945049],"mode":"markers","marker":{"color":"rgba(238,197,145,1)","size":10,"line":{"color":"rgba(238,197,145,1)"}},"type":"scatter3d","name":"PN El Palmar","textfont":{"color":"rgba(238,197,145,1)"},"error_y":{"color":"rgba(238,197,145,1)"},"error_x":{"color":"rgba(238,197,145,1)"},"line":{"color":"rgba(238,197,145,1)"},"frame":null},{"x":[-3.6465371842335634,5.4663056016070648,1.9046913271212049,0.87799952045451957,3.8609656870301556,3.3967707871479216,2.8131929587992999,1.5804799316432552,3.1360700065598226,3.0713400947501759,3.1962602580317432,0.16173787174897197,3.1051981473765866,-1.6684115693998425,-1.9516202240983864,-1.4274048115360591,0.87170240707973778,1.3244615717950468,-3.2193705845695488,-3.0720342256807878,-0.67597033654295313,3.4675742482353025,3.4240555315421819,2.4198607972546213,-3.8949665434034131,1.5813144356657278,-2.8541878671272043,-0.41982610566539008,0.68843607501987147,-2.6433741554908958,0.066250228293392902,5.0761290341879866,2.3358492934536206,2.0522533627120434,3.5373529338596543,3.6609799126549238,2.7433285269341892,1.7695655290374597,4.892292321907286,4.0181887831526328,3.6375461356775558],"y":[-1.9495466890168103,-1.2255094031263811,0.27449825905956643,-2.5435152640377909,-0.53950850443276144,-1.2607724137266521,0.44927354736960795,0.2439369737717946,2.1353277525849164,2.0929617134143776,1.119285161053019,-1.166074367120371,2.2154429910674382,-1.6292091931251271,-4.5330039981953361,-3.201301556107047,-5.4316635262404676,-2.0746753118178214,-1.6190728037237976,-0.44814662531062743,-3.8272632826532127,-1.5777677333831128,1.3046459364265914,-3.9818410045330839,-4.4202307404348007,0.42020374713520364,-0.05022076105265745,-1.555416335558268,-2.5992281066347163,0.12488041962743707,-0.89438713174017381,-5.816572363937639,-2.2901956974661202,-5.321721759301929,-2.8488975260398735,-1.5769605041564447,-4.2962418921993777,-1.6379171265072583,-0.38509756463013473,-1.6595737574707663,0.24352818446672914],"z":[-0.83532319946083144,-2.8758656852555133,-0.20455066878234385,0.67842330488705538,0.11233064919908459,-2.9697906983703568,0.65618440844951387,0.0743248040876376,-0.78830345231170718,-0.90068289121850253,-1.6655409820059053,-0.70036396169801507,-0.87138937543117467,-1.3331350816500462,0.29615661671032423,-0.73670822404078296,0.91592397078212429,0.88891894285697282,0.56312603749657364,1.7869737950916535,-0.70338561135843991,1.2863708418931716,-0.53834690297399124,-0.74861053557964752,2.1034107717462356,-0.089193900538378862,0.6766134612585275,-1.2364040969859786,0.59388565083475819,1.6146192716011238,-1.566775422669497,-2.8379387553469138,1.1774981854497284,0.58039205373171199,1.0640405028843638,0.091357828311117245,1.8971832425014923,1.6449269995308935,1.9483255586546671,1.4684079593306529,-0.57325944203039891],"mode":"markers","marker":{"color":"rgba(84,139,84,1)","size":10,"line":{"color":"rgba(84,139,84,1)"}},"type":"scatter3d","name":"Gualeguaychú","textfont":{"color":"rgba(84,139,84,1)"},"error_y":{"color":"rgba(84,139,84,1)"},"error_x":{"color":"rgba(84,139,84,1)"},"line":{"color":"rgba(84,139,84,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-53ff9e991154ddbdbd75" style="width:2304px;height:921.6px;"></div>
+<script type="application/json" data-for="htmlwidget-53ff9e991154ddbdbd75">{"x":{"visdat":{"2d505332249b":["function () ","plotlyVisDat"]},"cur_data":"2d505332249b","attrs":{"2d505332249b":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":10},"color":{},"colors":["coral1","burlywood2","palegreen4"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"PC1"},"yaxis":{"title":"PC2"},"zaxis":{"title":"PC3"}},"title":"PCA: Componentes Principales 1, 2 y 3","legend":{"title":{"text":"Sitios"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-2.0337844466922972,-1.5467796074703777,-1.4765545470696475,-3.1915543012263266,-0.61904981672805803,1.81574321842223,1.3772158453625918,1.4719823241605892,0.76661324838880274,0.095271233342145212,0.004040084736349446,-3.0577511657224372,-3.55092282832759,1.4591467434695304,0.54085713344177933,1.9745858085863157,2.1517933322757927,-3.5899476658858993,1.3418614410899048,3.2660066290054877,3.0805944902752218,1.2905255129910065,0.49300134937061724,3.1585580048196467,-3.2286709001881286,-3.4001641348998115,3.5633113673744652,-1.8341268074575534,-0.64502764443265814,-1.4762128027273029,-0.12792190195513853,0.46976651344423553,0.51921690022500189,-2.520190205997535,-2.0475393078258421,4.9430649368910347,5.6076453035912355,4.3019976807158695,1.867961849098889,-2.5158741696169278,2.4612158558478661,-1.6281135353045237,-0.30298326605603221,5.0813377654189944,-0.21541161013581503,0.0012029249385579477,0.48082698594031353],"y":[-0.35374066043064384,-0.31708067011623142,-1.6854458770017955,-0.1564170143359222,-0.43411292394930651,0.99555180457192238,1.0456883026256438,0.9843628803362614,0.88768614913682531,1.4598628120587755,0.93484196024124822,0.33965679823037825,-1.5399460894974606,1.1504315439691457,1.3760949079157272,1.9082394668677294,0.11678340240883209,2.5405042656804775,1.6926785968186235,1.0964790528101998,1.4893437754386956,1.6798188885969239,3.8813976611907073,1.4499715574954584,1.7724193772251273,1.8352879456702738,2.7069705691676158,2.7930858818579227,3.302252536443834,1.3654618915196959,2.5668804618554644,1.1282925244925206,-0.84192472529151852,2.2512085183344173,1.0946359118302751,2.1988103954361309,0.91685251103002652,0.65558615993021507,0.0326263648802948,0.95394569391333683,1.5683814427118272,1.7103246191106787,0.14355776532611983,1.9016065743098769,2.2911277494688909,2.5932426114513625,0.45563092511743025],"z":[-0.57904868859901282,-1.2560301337451123,-1.4250849546337359,0.92772592085153471,-1.7298252862226444,-0.10324065015435711,1.550206476546969,-0.075372760366486102,-0.31454265715777424,0.19057749081976028,-0.49024713528680797,-0.33811532580361925,-0.082136692968429542,0.24638776116143402,0.29597094291664844,-1.9803532285514358,-0.97746628605729147,0.83439634009667818,0.092568087455328935,-0.60074761254534004,-0.5043223376507493,-0.26672415116579862,0.65346694145593587,-0.52634598051514436,0.080224651942497435,0.48150457098282551,-0.27467294281665661,0.6167513590750312,-1.041555786278205,0.89397489450534762,0.29834364682455139,0.30166512577331117,-0.70715025329624137,0.23819532190082487,1.0125819053458296,3.623383049949283,3.3707358473080418,2.3671251050456963,0.29999138720964208,0.8198409129514832,1.798733783708286,0.067389527978268693,0.0075432710444780504,2.5931757562436411,2.0686898028912242,-0.3208755855687051,0.79067926742707606],"mode":"markers","marker":{"color":"rgba(255,114,86,1)","size":10,"line":{"color":"rgba(255,114,86,1)"}},"type":"scatter3d","name":"Concordia","textfont":{"color":"rgba(255,114,86,1)"},"error_y":{"color":"rgba(255,114,86,1)"},"error_x":{"color":"rgba(255,114,86,1)"},"line":{"color":"rgba(255,114,86,1)"},"frame":null},{"x":[-1.1883181850921061,-0.81886007340010936,1.1778547960828527,-1.1695823043572724,-1.9731446377466872,-2.5460975409898152,-0.77188104868434715,-3.3417036543006011,-0.91190015542580294,0.70311452482855874,-2.9396427063489976,-1.541762800162247,-0.50949986392501045,-1.3254504545521308,-0.43672725955931724,-4.9528301558766881,-2.7440538921968738,-3.4413777143601285,-2.2259277654745229,-1.4927569266219731,-3.2598748339839569,-3.669928431113044,-2.5264070584241427,0.30267788476623408,-4.0966433353140266,-1.3817831031024401,0.90811936917426217,-4.6845096890473688,-3.5077735074735528,-2.0655464509974744,-0.76354288243164037,-5.6560629651921523,-0.069714254581974694,-6.0136618017334325,-0.30601465287255591],"y":[-0.44723487375574039,0.72671260808886173,0.27391594822148185,0.34041000445431957,-0.32748504160631031,0.1479533303435098,0.77711863121248781,-1.2670086609625222,1.7587454029751177,0.694238544946855,-0.66535951251344794,-0.46970058303956014,0.65713872877591251,0.24434633450742835,-1.0960782346335027,-2.2944399963391762,-0.924873131672033,-0.17539354853710826,1.809905027651727,1.4378492001428023,1.9672213034561596,-1.3901919077438203,1.554427419622241,-0.79599424875511415,-0.73025213921208421,2.2905628860871574,1.8099896957022505,-0.81025358506718492,-0.35989115763804724,0.95516928621719477,-0.31256745182755169,1.7515101162936229,0.50538156918468302,-0.26299684689877945,-1.5742411568319878],"z":[-0.6158493868271212,-1.798249445700739,-2.2262259888351732,-1.7743663293065428,-0.74374355148065674,-0.11021202338357788,-0.83781280119381818,-0.85272777965735846,-1.0506103767782098,1.0900534378938675,0.60879150762073764,-0.012323857795111165,-0.93532902202369228,-2.10288357793134,-1.6558749993715352,1.3109880400034692,-0.29679910169145046,0.31690904392111857,-1.2759636894911592,-0.78005570636427901,-2.4040684813337458,0.18708943787364526,-0.90255847611033924,-0.88632788864981227,-0.59904089894877854,-0.95767759619149873,0.89727452486530279,0.45099068785543234,1.7513393713746228,-1.0127060856498049,-1.9771710999583125,0.78827345368007073,0.26443000531793054,4.4891888278093681,0.78145315684945049],"mode":"markers","marker":{"color":"rgba(238,197,145,1)","size":10,"line":{"color":"rgba(238,197,145,1)"}},"type":"scatter3d","name":"PN El Palmar","textfont":{"color":"rgba(238,197,145,1)"},"error_y":{"color":"rgba(238,197,145,1)"},"error_x":{"color":"rgba(238,197,145,1)"},"line":{"color":"rgba(238,197,145,1)"},"frame":null},{"x":[-3.6465371842335634,5.4663056016070648,1.9046913271212049,0.87799952045451957,3.8609656870301556,3.3967707871479216,2.8131929587992999,1.5804799316432552,3.1360700065598226,3.0713400947501759,3.1962602580317432,0.16173787174897197,3.1051981473765866,-1.6684115693998425,-1.9516202240983864,-1.4274048115360591,0.87170240707973778,1.3244615717950468,-3.2193705845695488,-3.0720342256807878,-0.67597033654295313,3.4675742482353025,3.4240555315421819,2.4198607972546213,-3.8949665434034131,1.5813144356657278,-2.8541878671272043,-0.41982610566539008,0.68843607501987147,-2.6433741554908958,0.066250228293392902,5.0761290341879866,2.3358492934536206,2.0522533627120434,3.5373529338596543,3.6609799126549238,2.7433285269341892,1.7695655290374597,4.892292321907286,4.0181887831526328,3.6375461356775558],"y":[-1.9495466890168103,-1.2255094031263811,0.27449825905956643,-2.5435152640377909,-0.53950850443276144,-1.2607724137266521,0.44927354736960795,0.2439369737717946,2.1353277525849164,2.0929617134143776,1.119285161053019,-1.166074367120371,2.2154429910674382,-1.6292091931251271,-4.5330039981953361,-3.201301556107047,-5.4316635262404676,-2.0746753118178214,-1.6190728037237976,-0.44814662531062743,-3.8272632826532127,-1.5777677333831128,1.3046459364265914,-3.9818410045330839,-4.4202307404348007,0.42020374713520364,-0.05022076105265745,-1.555416335558268,-2.5992281066347163,0.12488041962743707,-0.89438713174017381,-5.816572363937639,-2.2901956974661202,-5.321721759301929,-2.8488975260398735,-1.5769605041564447,-4.2962418921993777,-1.6379171265072583,-0.38509756463013473,-1.6595737574707663,0.24352818446672914],"z":[-0.83532319946083144,-2.8758656852555133,-0.20455066878234385,0.67842330488705538,0.11233064919908459,-2.9697906983703568,0.65618440844951387,0.0743248040876376,-0.78830345231170718,-0.90068289121850253,-1.6655409820059053,-0.70036396169801507,-0.87138937543117467,-1.3331350816500462,0.29615661671032423,-0.73670822404078296,0.91592397078212429,0.88891894285697282,0.56312603749657364,1.7869737950916535,-0.70338561135843991,1.2863708418931716,-0.53834690297399124,-0.74861053557964752,2.1034107717462356,-0.089193900538378862,0.6766134612585275,-1.2364040969859786,0.59388565083475819,1.6146192716011238,-1.566775422669497,-2.8379387553469138,1.1774981854497284,0.58039205373171199,1.0640405028843638,0.091357828311117245,1.8971832425014923,1.6449269995308935,1.9483255586546671,1.4684079593306529,-0.57325944203039891],"mode":"markers","marker":{"color":"rgba(84,139,84,1)","size":10,"line":{"color":"rgba(84,139,84,1)"}},"type":"scatter3d","name":"Gualeguaychú","textfont":{"color":"rgba(84,139,84,1)"},"error_y":{"color":"rgba(84,139,84,1)"},"error_x":{"color":"rgba(84,139,84,1)"},"line":{"color":"rgba(84,139,84,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <div id="análisis-de-clusters" class="section level3">
 <h3>Análisis de clusters</h3>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-86-1.png" width="100%" style="display: block; margin: auto;" /><img src="V_fruits_files/figure-html/unnamed-chunk-86-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-87-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="V_fruits_files/figure-html/unnamed-chunk-87-2.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
 <pre><code>## # A tibble: 7 × 27
 ##   cluster_kmeans PC1_mean PC1_sd PC2_mean PC2_sd PC3_mean PC3_sd    PFF    DMAF
 ##   &lt;fct&gt;             &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -1438,7 +1451,7 @@ Resumen</p>
 ## #   `DMAF/DPF` &lt;dbl&gt;, `*L` &lt;dbl&gt;, `*a` &lt;dbl&gt;, `*b` &lt;dbl&gt;, PT &lt;dbl&gt;, CLa &lt;dbl&gt;,
 ## #   CLb &lt;dbl&gt;, CTC &lt;dbl&gt;, IM &lt;dbl&gt;, ATT &lt;dbl&gt;, `SS/ATT` &lt;dbl&gt;, SS &lt;dbl&gt;,
 ## #   DPPH25 &lt;dbl&gt;, `CTC/CL` &lt;dbl&gt;</code></pre>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-86-3.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-87-3.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="selección-de-fenotipos-superiores" class="section level2">
@@ -1570,16 +1583,16 @@ Resumen</p>
 ##    DMAF/DPF 
 ##  1.34226769</code></pre>
 <p>Proporción de contribución de cada variable a PC1, PC2 y PC3
-<img src="V_fruits_files/figure-html/unnamed-chunk-93-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-94-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<img src="V_fruits_files/figure-html/unnamed-chunk-94-1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-95-1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
 <p>Triplot:</p>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-69853e767a8ab97ce6ed" style="width:100%;height:921.6px;"></div>
-<script type="application/json" data-for="htmlwidget-69853e767a8ab97ce6ed">{"x":{"visdat":{"249c3db26ac3":["function () ","plotlyVisDat"]},"cur_data":"249c3db26ac3","attrs":{"249c3db26ac3":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":10},"color":{},"colors":["coral1","burlywood2","palegreen4"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"PC1"},"yaxis":{"title":"PC2"},"zaxis":{"title":"PC3"}},"title":"PCA: Componentes Principales 1, 2 y 3","legend":{"title":{"text":"Sitios"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-2.20448222276345,-2.038336518750484,0.015355555805472987,0.63484183455970211,-1.9722790324572168,-4.3065998656742268,-2.1372690332480251,-2.3084182504709903,-2.0769140041538838,0.73929093687501712,0.95669740467679176,-3.6466256851110135,-2.3738197580917197,-2.7722920686983326,-2.1450824800579542],"y":[-0.10242575328373398,-0.54166825947078789,-3.2549777343797852,1.9619277801593848,-1.2668427474552344,-1.0399179115401209,0.45761508669813411,1.0906629479633461,0.12803406421560951,2.2498175405155383,0.71921792400201456,-1.4199420519835371,1.4129214396728291,1.4752406111704504,-0.48355745846353426],"z":[1.899612259799764,0.27322201446022265,-1.2106299392315001,1.3820897417500488,0.85954191896932475,0.64704748979794302,0.44854102027025816,1.9130051271767163,-0.20397789893022927,-0.42577101233834447,-0.24011235134554737,0.80907189899138765,1.8189978011332695,0.87261224147312388,1.2104757847659608],"mode":"markers","marker":{"color":"rgba(255,114,86,1)","size":10,"line":{"color":"rgba(255,114,86,1)"}},"type":"scatter3d","name":"Concordia","textfont":{"color":"rgba(255,114,86,1)"},"error_y":{"color":"rgba(255,114,86,1)"},"error_x":{"color":"rgba(255,114,86,1)"},"line":{"color":"rgba(255,114,86,1)"},"frame":null},{"x":[1.4202025525328124,0.83578538891366905,-0.51726723070322034,-2.8498587038760843,0.14455642635179144,1.8155184283100738,0.49815634010280352,-1.4881513870190703,2.0539307095621862,-1.4771645512001108,-2.9010832976534262,2.5158492023093442,1.3174673840718651,-0.67597291012026195,-0.48032281000975829,4.5050622062778549,2.0844665411998684,6.0103450800650453],"y":[-0.66892699917101783,0.40583572474797125,1.9015716701036851,-0.51903460572472981,2.5301083047549215,-0.40827181880461572,1.6714865295909349,0.72762622533792098,0.24752857699859582,2.627314200514919,-0.13623001314711208,0.25115583566083377,0.41462813244090063,0.71621070584658608,-0.20603581325475606,3.3411253069894888,0.45879351620052411,3.9330119784825666],"z":[-0.90186378531668099,-0.94341833744275938,-2.8933240631213479,-1.4822892170705009,-3.6972318407187132,-1.2785263652652961,-0.88200859653728936,-0.3017283783835738,-2.6741886819431833,-1.6867808196624599,3.1948988696295797,0.027784942252154995,0.48266510318613742,-2.1515072924484229,-3.2783456135808446,0.89544221524754075,0.15187021859209951,3.4098226651162498],"mode":"markers","marker":{"color":"rgba(238,197,145,1)","size":10,"line":{"color":"rgba(238,197,145,1)"}},"type":"scatter3d","name":"PN El Palmar","textfont":{"color":"rgba(238,197,145,1)"},"error_y":{"color":"rgba(238,197,145,1)"},"error_x":{"color":"rgba(238,197,145,1)"},"line":{"color":"rgba(238,197,145,1)"},"frame":null},{"x":[0.52227207136107989,2.1816561700514128,2.3831883470324549,1.3075929421209018,4.0653023344973862,0.97961931079599085,1.3847826425857039],"y":[-1.9595607211948831,-7.4633047532356747,-2.0439333609522676,-1.7121396221347664,-4.4065835148405812,-0.62110341307939398,-0.46737754995062253],"z":[-1.7649859630868963,-0.4777668195389207,0.29798694199981446,2.2108460051123218,0.97373947362500857,0.79932827873534262,1.9158549638782423],"mode":"markers","marker":{"color":"rgba(84,139,84,1)","size":10,"line":{"color":"rgba(84,139,84,1)"}},"type":"scatter3d","name":"Gualeguaychú","textfont":{"color":"rgba(84,139,84,1)"},"error_y":{"color":"rgba(84,139,84,1)"},"error_x":{"color":"rgba(84,139,84,1)"},"line":{"color":"rgba(84,139,84,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-5c20af4848859d93dc34" style="width:100%;height:921.6px;"></div>
+<script type="application/json" data-for="htmlwidget-5c20af4848859d93dc34">{"x":{"visdat":{"2d5030303ab6":["function () ","plotlyVisDat"]},"cur_data":"2d5030303ab6","attrs":{"2d5030303ab6":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":10},"color":{},"colors":["coral1","burlywood2","palegreen4"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"PC1"},"yaxis":{"title":"PC2"},"zaxis":{"title":"PC3"}},"title":"PCA: Componentes Principales 1, 2 y 3","legend":{"title":{"text":"Sitios"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-2.20448222276345,-2.038336518750484,0.015355555805472987,0.63484183455970211,-1.9722790324572168,-4.3065998656742268,-2.1372690332480251,-2.3084182504709903,-2.0769140041538838,0.73929093687501712,0.95669740467679176,-3.6466256851110135,-2.3738197580917197,-2.7722920686983326,-2.1450824800579542],"y":[-0.10242575328373398,-0.54166825947078789,-3.2549777343797852,1.9619277801593848,-1.2668427474552344,-1.0399179115401209,0.45761508669813411,1.0906629479633461,0.12803406421560951,2.2498175405155383,0.71921792400201456,-1.4199420519835371,1.4129214396728291,1.4752406111704504,-0.48355745846353426],"z":[1.899612259799764,0.27322201446022265,-1.2106299392315001,1.3820897417500488,0.85954191896932475,0.64704748979794302,0.44854102027025816,1.9130051271767163,-0.20397789893022927,-0.42577101233834447,-0.24011235134554737,0.80907189899138765,1.8189978011332695,0.87261224147312388,1.2104757847659608],"mode":"markers","marker":{"color":"rgba(255,114,86,1)","size":10,"line":{"color":"rgba(255,114,86,1)"}},"type":"scatter3d","name":"Concordia","textfont":{"color":"rgba(255,114,86,1)"},"error_y":{"color":"rgba(255,114,86,1)"},"error_x":{"color":"rgba(255,114,86,1)"},"line":{"color":"rgba(255,114,86,1)"},"frame":null},{"x":[1.4202025525328124,0.83578538891366905,-0.51726723070322034,-2.8498587038760843,0.14455642635179144,1.8155184283100738,0.49815634010280352,-1.4881513870190703,2.0539307095621862,-1.4771645512001108,-2.9010832976534262,2.5158492023093442,1.3174673840718651,-0.67597291012026195,-0.48032281000975829,4.5050622062778549,2.0844665411998684,6.0103450800650453],"y":[-0.66892699917101783,0.40583572474797125,1.9015716701036851,-0.51903460572472981,2.5301083047549215,-0.40827181880461572,1.6714865295909349,0.72762622533792098,0.24752857699859582,2.627314200514919,-0.13623001314711208,0.25115583566083377,0.41462813244090063,0.71621070584658608,-0.20603581325475606,3.3411253069894888,0.45879351620052411,3.9330119784825666],"z":[-0.90186378531668099,-0.94341833744275938,-2.8933240631213479,-1.4822892170705009,-3.6972318407187132,-1.2785263652652961,-0.88200859653728936,-0.3017283783835738,-2.6741886819431833,-1.6867808196624599,3.1948988696295797,0.027784942252154995,0.48266510318613742,-2.1515072924484229,-3.2783456135808446,0.89544221524754075,0.15187021859209951,3.4098226651162498],"mode":"markers","marker":{"color":"rgba(238,197,145,1)","size":10,"line":{"color":"rgba(238,197,145,1)"}},"type":"scatter3d","name":"PN El Palmar","textfont":{"color":"rgba(238,197,145,1)"},"error_y":{"color":"rgba(238,197,145,1)"},"error_x":{"color":"rgba(238,197,145,1)"},"line":{"color":"rgba(238,197,145,1)"},"frame":null},{"x":[0.52227207136107989,2.1816561700514128,2.3831883470324549,1.3075929421209018,4.0653023344973862,0.97961931079599085,1.3847826425857039],"y":[-1.9595607211948831,-7.4633047532356747,-2.0439333609522676,-1.7121396221347664,-4.4065835148405812,-0.62110341307939398,-0.46737754995062253],"z":[-1.7649859630868963,-0.4777668195389207,0.29798694199981446,2.2108460051123218,0.97373947362500857,0.79932827873534262,1.9158549638782423],"mode":"markers","marker":{"color":"rgba(84,139,84,1)","size":10,"line":{"color":"rgba(84,139,84,1)"}},"type":"scatter3d","name":"Gualeguaychú","textfont":{"color":"rgba(84,139,84,1)"},"error_y":{"color":"rgba(84,139,84,1)"},"error_x":{"color":"rgba(84,139,84,1)"},"line":{"color":"rgba(84,139,84,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <div id="análisis-de-clusters-1" class="section level3">
 <h3>Análisis de clusters</h3>
-<p><img src="V_fruits_files/figure-html/unnamed-chunk-96-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="V_fruits_files/figure-html/unnamed-chunk-97-1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
 <p>PCA discriminado por kluster 7
-<img src="V_fruits_files/figure-html/unnamed-chunk-97-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<img src="V_fruits_files/figure-html/unnamed-chunk-98-1.png" alt="" width="100%" style="display: block; margin: auto;" /></p>
 <p>Tabla resumen</p>
 <pre><code>## # A tibble: 7 × 2
 ##   cluster_hca Fenotipos                                                         

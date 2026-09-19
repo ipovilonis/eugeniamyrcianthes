@@ -13,10 +13,10 @@
 
 <title>Morphological</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,10 +29,12 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-  <link rel="icon" type="image/png" href="fruto.jpg"/>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -221,6 +223,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -230,9 +295,19 @@ $(document).ready(function () {
 <div class="container-fluid main-container">
 
 
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
@@ -240,7 +315,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Inicio</a>
+      <a class="navbar-brand" href="index.html">Proyecto Ubajay</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -470,6 +545,7 @@ $(document).ready(function () {
 </div>
 
 
+<pre><code>## Warning: Unknown or uninitialised column: `pss`.</code></pre>
 <pre><code>## Error in `$&lt;-`:
 ## ! Assigned data `as.numeric(fisico$pss)` must be compatible with
 ##   existing data.
@@ -486,7 +562,7 @@ $(document).ready(function () {
 ## 3                 Dry seed weight         NA
 ## 4                 Dry pulp weight         NA
 ## 5 Dry pulp/fresh fruit weight (%) 3.40740390</code></pre>
-<p><img src="V_Morphological_files/figure-html/unnamed-chunk-3-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-4-1.png" alt="" width="1920" style="display: block; margin: auto;" /></p>
 </div>
 <div id="maturity-index" class="section level1">
 <h1>Maturity index</h1>
@@ -529,7 +605,7 @@ $(document).ready(function () {
 ## 36 Gualeguaychú       337 4 0.0000  0  0  0
 ## 37 Gualeguaychú       362 4 0.0000  0  0  0
 ## 38 Gualeguaychú       363 4 0.2222  0  0  0</code></pre>
-<p><img src="V_Morphological_files/figure-html/unnamed-chunk-4-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-5-1.png" alt="" width="1920" style="display: block; margin: auto;" /></p>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: (indmad) ~ 1 + (1 | site/phenotype)
@@ -546,7 +622,7 @@ $(document).ready(function () {
 ## Random effects:
 ##  Groups         Name        Variance                Std.Dev.       
 ##  phenotype:site (Intercept) 0.019193917614212241407 0.1385421149478
-##  site           (Intercept) 0.000003145550723225194 0.0017735700503
+##  site           (Intercept) 0.000003145550723225195 0.0017735700503
 ##  Residual                   0.000000000000000376945 0.0000000194151
 ## Number of obs: 152, groups:  phenotype:site, 38; site, 3
 ## 
@@ -555,15 +631,13 @@ $(document).ready(function () {
 ## (Intercept) 0.4230769  0.0225854 0.0028580 18.7323  0.98145
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## Model failed to converge with max|grad| = 0.407859 (tol = 0.002, component 1)
+##   See ?lme4::convergence and ?lme4::troubleshooting.
 ## Model is nearly unidentifiable: very large eigenvalue
 ##  - Rescale variables?</code></pre>
 <pre><code>## [1] 0.00000000000196355608</code></pre>
 <pre><code>## [1] 99.9836144</code></pre>
 <pre><code>## [1] 0.016385583</code></pre>
-<pre><code>## # Intraclass Correlation Coefficient
-## 
-##     Adjusted ICC: 1.000
-##   Unadjusted ICC: 1.000</code></pre>
+<pre><code>## [1] NA</code></pre>
 </div>
 <div id="pff-peso-fresco-del-fruto" class="section level1">
 <h1><strong>pff</strong> Peso fresco del fruto</h1>
@@ -571,7 +645,7 @@ $(document).ready(function () {
 ## 1 2019 &lt;NA&gt; 411  9.67944428 6.27183053 0.309366586 0.608142575
 ## 2 2021 &lt;NA&gt; 514 10.48482101 6.97811274 0.307791358 0.604686607
 ## 3 2022 &lt;NA&gt; 241  8.35790041 5.10494153 0.328838191 0.647777575</code></pre>
-<p><img src="V_Morphological_files/figure-html/unnamed-chunk-10-1.png" width="1920" style="display: block; margin: auto;" />
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-11-1.png" alt="" width="1920" style="display: block; margin: auto;" />
 The bars indicate standard deviation. The dashed red line indicates the
 mean.</p>
 </div>
@@ -581,7 +655,7 @@ mean.</p>
 ## 1 2019 &lt;NA&gt; 411 27.3737275  7.43840343 0.366909383 0.721258298
 ## 2 2021 &lt;NA&gt; 514 27.7115506 11.98208062 0.528506920 1.038304186
 ## 3 2022 &lt;NA&gt; 241 24.9940249  6.32441809 0.407391582 0.802519714</code></pre>
-<p><img src="V_Morphological_files/figure-html/unnamed-chunk-11-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="V_Morphological_files/figure-html/unnamed-chunk-12-1.png" alt="" width="1920" style="display: block; margin: auto;" /></p>
 <p>The bars indicate standard deviation. The dashed red line indicates
 the mean.</p>
 <div id="pen" class="section level2">
@@ -591,6 +665,8 @@ the mean.</p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -623,6 +699,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

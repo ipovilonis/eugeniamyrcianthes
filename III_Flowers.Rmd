@@ -2,6 +2,13 @@
 title: "Predicción del incio y plena floración en Moreno"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 ## Fórmula de Grados-Día
 
 La fórmula para calcular los grados-día (\(GD\)) acumulados se define como:

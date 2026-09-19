@@ -9,6 +9,13 @@ output:
      smooth_scroll: true
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 
 ```{r  , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
@@ -382,8 +389,8 @@ library(ggplot2)
 library(reshape2)
 
 # Convertir las matrices a dataframes largos
-df_corr <- melt(matriz_corr, varnames = c("Var1", "Var2"), value.name = "r")
-df_p <- melt(p_valores, varnames = c("Var1", "Var2"), value.name = "p")
+df_corr <- reshape2::melt(matriz_corr, varnames = c("Var1", "Var2"), value.name = "r")
+df_p <- reshape2::melt(p_valores, varnames = c("Var1", "Var2"), value.name = "p")
 
 # Unir los dataframes por las variables Var1 y Var2
 df_combined <- merge(df_corr, df_p, by = c("Var1", "Var2"))

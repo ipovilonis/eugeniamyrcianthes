@@ -2,6 +2,13 @@
 title: "Documento con Ecuaciones y Leyendas"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 
 ## Fórmula de Grados-Día
 
@@ -52,6 +59,13 @@ E[Y_{ijkl}] = \mu + \alpha_i + \beta_j + (\gamma_k (\beta_j)) + \epsilon_{ijkl}
 - \(\epsilon_{ijkl}\): Son los errores aleatorios.
 
 ---
+
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
 
 ```{r, echo=FALSE, error=TRUE, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)

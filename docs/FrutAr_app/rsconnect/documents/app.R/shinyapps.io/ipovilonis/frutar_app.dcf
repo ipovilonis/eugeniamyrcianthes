@@ -1,0 +1,10 @@
+name: frutar_app
+title:
+username: ipovilonis
+account: ipovilonis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15067413
+bundleId: 10606225
+url: https://ipovilonis.shinyapps.io/frutar_app/
+version: 1

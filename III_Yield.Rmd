@@ -2,6 +2,13 @@
 title: "Yield"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 The fruit harvest was staggered in three weeks corresponding to the second, third and fourth week of December of the years 2019, 2020 and 2021. The fruits of each individual were weighed to compare yields between years by ANOVA.
 
 ```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=30, fig.height=8}

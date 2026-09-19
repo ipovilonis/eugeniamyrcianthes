@@ -1,7 +1,14 @@
 ---
 title: "Ensayo 1"
-output: pdf_document
+output: html_document
 ---
+
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
 
 Respiración acumulada en frutos I y M
 
@@ -50,7 +57,7 @@ gr1<-ggplot(data=resp2, aes(x=time_min, y=carbon_ac, color=matu))+
   xlab("Time (min)")+
   labs(color = "", shape = "")+
   scale_x_continuous(limits = c(0, 150), breaks = seq(0, 150, 15))
-gr1
+# gr1
 
 ```
 
@@ -139,7 +146,7 @@ library(ggplot2)
 library(GGally)
 ggcor1<-ggpairs(resp_tiempos) 
 # round(cor(tiempos),2) #matriz de correlacion
-ggcorr(resp_tiempos, label = TRUE, label_size = 3,limits = FALSE, midpoint = NULL, label_round = 2)
+# ggcorr(resp_tiempos, label = TRUE, label_size = 3,limits = FALSE, midpoint = NULL, label_round = 2)
 
 ```
 

@@ -3,6 +3,13 @@ title: "Comparison of extraction methods"
 
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 The objective is to compare the extraction capacity of secondary metabolites in two native fruit species: Sambucus australis and Hexachlamys edulis. The methods were: potter homogenizer and another manual with glass rod.
 
 ```{r, echo=FALSE,warning = FALSE, message = FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=12}

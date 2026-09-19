@@ -2,6 +2,13 @@
 title: "Bibliografía"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 * Aburto, N.J., Hanson, S., Gutierrez, H., Hooper, L., Elliott, P., & Cappuccio, F.P. (2013). Effect of increased potassium intake on cardiovascular risk factors and disease: Systematic review and meta-analyses. BMJ 346, f1378.
 * Agostini, J.P., Preussler, C., Outi, Y., Cortese, P.P., & Bouvet, J. (2015). Plagas cuarentenarias de frutales de la República Argentina Avances en los resultados. Revista, 36: 1-36.
 * Agrimundo (2013). Perspectivas para los berries nativos en el mercado internacional. Revista, 1: 1-1.

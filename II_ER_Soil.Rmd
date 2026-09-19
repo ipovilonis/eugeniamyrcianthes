@@ -3,6 +3,13 @@ title: "Suelo en Entre Ríos"
 
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 # Análisis de laboratorio
 
 ```{r, echo=FALSE}

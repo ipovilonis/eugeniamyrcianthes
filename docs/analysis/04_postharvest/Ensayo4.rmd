@@ -1,0 +1,18 @@
+---
+title: "Ensayo 4"
+output:
+ html_document:
+   toc: true
+   toc_depth: 5
+   toc_float:
+     collapsed: false
+     smooth_scroll: true
+---
+
+Evolución de frutos cosechados en estado inmaduro y medio maduro
+```{r pressure, echo=FALSE, error=TRUE, fig.cap="Frutos de H. edulis cosechados en Gualeguaychú en noviembre de 2022", out.width = '100%'}
+
+knitr::include_graphics("ensayo4.jpg")
+
+```
+

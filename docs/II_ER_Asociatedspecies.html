@@ -13,10 +13,10 @@
 
 <title>Especies asociadas</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,10 +29,12 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-  <link rel="icon" type="image/png" href="fruto.jpg"/>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -221,6 +223,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -230,9 +295,19 @@ $(document).ready(function () {
 <div class="container-fluid main-container">
 
 
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
@@ -240,7 +315,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Inicio</a>
+      <a class="navbar-brand" href="index.html">Proyecto Ubajay</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -500,7 +575,7 @@ abundancia es el número de individuos por superficie o punto de muestreo
 </div>
 <div id="bosques-argentinos" class="section level1">
 <h1>Bosques argentinos</h1>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-2-1.png" width="960" style="display: block; margin: auto;" />
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-3-1.png" alt="" width="960" style="display: block; margin: auto;" />
 A pesar de su importancia, la superficie de bosques nativos en Argentina
 ha sufrido una pérdida de 6.631.000 hectáreas entre los años 1990 y
 2020, año en el cual se registraron aproximadamente 27.137.000 hectáreas
@@ -575,12 +650,12 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 </div>
 <div id="indicadores-de-biodiversidad" class="section level1">
 <h1>Indicadores de biodiversidad</h1>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-8-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-9-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <div id="anova-de-indicadores" class="section level2">
 <h2>ANOVA de indicadores</h2>
 <div id="richness" class="section level3">
 <h3>Richness</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-11-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-12-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-12-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -611,12 +686,12 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  NP El Palmar - Gualeguaychu -1.9450549 0.6796134 36  -2.862  0.0187
 ## 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-13-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-14-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="abundance" class="section level3">
 <h3>Abundance</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-15-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-16-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-16-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -647,16 +722,18 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  NP El Palmar - Gualeguaychu -7.384615 2.189897 36  -3.372  0.0050
 ## 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-18-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="dominance_d" class="section level3">
 <h3>Dominance_D</h3>
+<pre><code>## Error:
+## ! objeto &#39;site&#39; no encontrado</code></pre>
 <pre><code>##                 df       AIC
 ## mbi_Dominance_D  4 -60.80891
 ## m1               4 -45.61832
-## m2               4 -30.92338</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-20-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-20-2.png" width="960" style="display: block; margin: auto;" /></p>
+## m2              23 146.77869</code></pre>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-21-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-21-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -686,19 +763,22 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  Concordia - Gualeguaychu    -0.9642181 0.6665025 36  -1.447  0.3283
 ##  NP El Palmar - Gualeguaychu -1.7085974 0.6009024 36  -2.843  0.0195
 ## 
-## Note: contrasts are still on the inverse scale 
+## Note: contrasts are still on the inverse scale. Consider using
+##       regrid() if you want contrasts of back-transformed estimates. 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-22-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-23-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="simpson_1d" class="section level3">
 <h3>Simpson_1D</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-23-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-24-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## Error:
+## ! objeto &#39;site&#39; no encontrado</code></pre>
 <pre><code>##                df         AIC
 ## mbi_Simpson_1D  4 -237.838225
 ## m1              4    1.696391
-## m2              4  -30.923384</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-24-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-24-2.png" width="960" style="display: block; margin: auto;" /></p>
+## m2             23  146.778692</code></pre>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-25-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-25-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -728,15 +808,18 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  Concordia - Gualeguaychu    -0.09761849 0.07416998 35  -1.316  0.3959
 ##  NP El Palmar - Gualeguaychu -0.16424457 0.07214922 35  -2.276  0.0725
 ## 
-## Note: contrasts are still on the inverse scale 
+## Note: contrasts are still on the inverse scale. Consider using
+##       regrid() if you want contrasts of back-transformed estimates. 
 ## Results are given on the log (not the response) scale. 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-26-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-27-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="shannon_h" class="section level3">
 <h3>Shannon_H</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-28-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-28-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>## Error:
+## ! objeto &#39;site&#39; no encontrado</code></pre>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-29-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-29-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -767,14 +850,15 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  Concordia - Gualeguaychu    -0.0832201 0.07001766 36  -1.189  0.4675
 ##  NP El Palmar - Gualeguaychu -0.1919743 0.06736683 36  -2.850  0.0192
 ## 
-## Note: contrasts are still on the sqrt scale 
+## Note: contrasts are still on the sqrt scale. Consider using
+##       regrid() if you want contrasts of back-transformed estimates. 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-30-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-31-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="evenness_ehs" class="section level3">
 <h3>Evenness_eHS</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-32-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-32-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-33-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-33-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -803,12 +887,12 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  NP El Palmar - Gualeguaychu -0.02926484 0.02749486 36  -1.064  0.5420
 ## 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-34-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-35-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="margalef" class="section level3">
 <h3>Margalef</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-36-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-36-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-37-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-37-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -837,12 +921,12 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  NP El Palmar - Gualeguaychu -0.3884615 0.2022052 36  -1.921  0.1474
 ## 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-38-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-39-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="equitatibilidad" class="section level3">
 <h3>Equitatibilidad</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-40-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-40-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-41-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-41-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -871,12 +955,12 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ## 
 ## Degrees-of-freedom method: satterthwaite 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-42-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-43-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="anthropic_ia" class="section level3">
 <h3>anthropic_Ia</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-44-1.png" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-44-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-45-1.png" alt="" width="960" style="display: block; margin: auto;" /><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-45-2.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -907,7 +991,7 @@ familias con 70 especies de riqueza y 613 ejemplares de abundancia.</p>
 ##  NP El Palmar - Gualeguaychu 0.08169806 0.05656920 36   1.444  0.3295
 ## 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-46-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-47-1.png" alt="" width="960" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -919,13 +1003,13 @@ H = -\sum_{i=1}^{n} p_i \log_{2}(p_i)
 </div>
 <div id="número-de-especies-por-sitio" class="section level2">
 <h2>Número de especies por sitio</h2>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-50-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-51-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Las barras representan el error estándar.</p>
 </div>
 <div id="exponente-del-índice-de-shannon-por-sitio"
 class="section level2">
 <h2>Exponente del índice de Shannon por sitio</h2>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-52-1.png" width="2304" style="display: block; margin: auto;" />
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-53-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Las barras representan el error estándar.</p>
 </div>
 <div id="materiales-y-métodos-1" class="section level2">
@@ -959,7 +1043,7 @@ id="agrupamiento-jerárquico-de-los-censos-a-través-de-la-distancia-de-bray-cur
 class="section level3">
 <h3>Agrupamiento jerárquico de los censos a través de la distancia de
 Bray-Curtis y método de Ward.</h3>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-56-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-57-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <p>Los agrupamientos en tres grupos principales incluyen
 mayoritariamente a censos de las mismas poblaciones. En rojo se
 observan</p>
@@ -1008,7 +1092,7 @@ respectivamente. Si el investigador está interesado en ordenar las UE de
 acuerdo a otra medida de similitud, entonces puede utilizar el análisis
 de coordenadas principales (PCoA).”</em></p>
 <p>Realizado a partir de la matriz de similitudes por Bray-Curtis.
-<img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-59-1.png" width="2304" style="display: block; margin: auto;" />
+<img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-60-1.png" alt="" width="2304" style="display: block; margin: auto;" />
 Se observa un ordenamiento muy marcado de las poblaciones en
 concordancia con los resultados anteriores. Los dos ejes principales
 explican un 27.19% de la variación total de los datos.</p>
@@ -1016,7 +1100,7 @@ explican un 27.19% de la variación total de los datos.</p>
 </div>
 <div id="análisis-discriminante" class="section level2">
 <h2>Análisis discriminante</h2>
-<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-62-1.png" width="2304" style="display: block; margin: auto;" /></p>
+<p><img src="II_ER_Asociatedspecies_files/figure-html/unnamed-chunk-63-1.png" alt="" width="2304" style="display: block; margin: auto;" /></p>
 <table>
 <thead>
 <tr class="header">
@@ -1090,6 +1174,8 @@ acompañantes.</p>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -1122,6 +1208,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

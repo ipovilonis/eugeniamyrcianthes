@@ -2,6 +2,13 @@
 title: "Polinización"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 ## Objetivo
 El objetivo de este ensayo fue estudiar el régimen de polinización de la especie.
 

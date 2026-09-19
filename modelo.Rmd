@@ -1,7 +1,14 @@
 ---
 title: "Modelos y Supuestos"
-output: word_document
+output: html_document
 ---
+
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
 ### El modelo de distribución normal se expresa como:
 
 $$

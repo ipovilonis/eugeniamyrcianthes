@@ -3,6 +3,13 @@ title: "Fenotipos: caracterización"
 output: html_document
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 Aquí tienes la explicación: 
 
 ### 🌿 Explorador de Fenotipos de *Hexachlamys edulis*

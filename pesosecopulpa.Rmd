@@ -1,7 +1,14 @@
 ---
 title: "Modelo para peso seco"
-output: pdf_document
+output: html_document
 ---
+
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
 
 # Carga de datos y conversión de variables
 ```{r  , echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=10, fig.height=8}

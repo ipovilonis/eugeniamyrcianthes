@@ -2,3 +2,10 @@
 title: "Clima Moreno"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+

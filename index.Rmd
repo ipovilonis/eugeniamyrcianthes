@@ -2,6 +2,13 @@
 title: "Inicio"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 <div class="hero-jumbotron">
   <h1>Investigación sobre el Ubajay</h1>
   <p class="lead">Desde la floración a la postcosecha: fisiología, morfología y bioquímica de un frutal subutilizado de Argentina, el “ubajay” (<em>Hexachlamys edulis</em> (O. Berg) Kausel & D. Legrand).</p>

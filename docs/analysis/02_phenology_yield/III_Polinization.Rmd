@@ -1,0 +1,122 @@
+---
+title: "Polinización"
+---
+
+## Objetivo
+El objetivo de este ensayo fue estudiar el régimen de polinización de la especie.
+
+## Materiales y Métodos
+Los estudios de polinización se realizaron sobre botones florales que aún no habían iniciado la antesis. En el tratamiento de **autopolinización natural** (NSPO), se aislaron ramas con un solo botón floral utilizando bolsas de papel. En la **autopolinización natural** (NSPS), se aislaron ramas con varios botones florales con bolsas de papel para evaluar la autocompatibilidad. En el tratamiento de **polinización abierta** (OP), las ramas fueron únicamente identificadas sin ningún tipo de aislamiento.
+
+En el tratamiento de **cruzamiento artificial con polen de otra planta** (CPA), los botones fueron emasculados y posteriormente polinizados manualmente con polen de otro genotipo. En el tratamiento de **cruzamiento artificial con polen del mismo genotipo** (CPS), los botones fueron emasculados y polinizados manualmente con polen de otras flores del mismo genotipo. Estas ramas también se cubrieron con bolsas de papel para evitar la entrada de polen desconocido.
+
+Se realizaron veinte repeticiones por tratamiento en ramas seleccionadas aleatoriamente. Finalmente, treinta días después, se verificó el cuajado de frutos.
+
+## Resultados
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=15, fig.height=12}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+library(readxl)
+data<-read_excel("database.xlsx", sheet = "III poliniza")
+
+data$Tratamiento <- factor(data$Tratamiento,
+                   levels = c("Libre", "Auto","Auto *", "Cruzado =","Cruzado *"),
+                   labels = c("[OP]", "[NSPO]","[NSPS]", "[CPS]","[CPA]"))
+
+data$Tratamiento<-as.factor(data$Tratamiento)
+data$Ef<-as.numeric(data$Ef)
+data$Tratamiento<-factor(data$Tratamiento,levels=c("[NSPO]","[NSPS]","[OP]","[CPA]", "[CPS]"))
+```
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=15, fig.height=12}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+datapol<-read_excel("database.xlsx", sheet = "III polin")
+
+datapol$TRA <- factor(datapol$TRA,
+                   levels = c("NSPO","NSPS","OP","CPA", "CPS"))
+
+library(ggplot2)
+G2<-ggplot(data=datapol, aes(x=TRA, y=PROP, fill=TRA)) +
+  geom_bar(stat="identity", position="stack", width=0.1) +
+  theme_classic()+
+  labs(y="Proporción de cuajado de frutos", x="Tratamiento")+
+  scale_fill_manual(values = c("coral4","coral","chocolate","chocolate4","tan3"))+
+  theme(text = element_text(size=20))+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "none")+
+  theme(panel.grid.major.y = element_line(size=0.05, color='black'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(text = element_text(size=20, color='black'))+
+  theme(axis.text = element_text(color='black'))
+G2
+
+```
+
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=15, fig.height=12}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+polin<-read_excel("database.xlsx", sheet = "III polin")
+
+polin$Tratamiento <- as.factor(polin$TRA)
+
+library(glmmTMB)
+# Modelo ajustado (binomial con sobre/subdispersión)
+model <- glm(PROP ~ Tratamiento, data = polin, weights = TOTAL,  family = "quasibinomial")
+
+# Supuestos
+RP <- resid(model, type = "pearson")
+ajust <- fitted(model)
+
+# Gráfico de residuos vs predichos
+plot(ajust, RP, xlab="Predichos", ylab= "Residuos de Pearson", main="Gráfico de RP vs PRED", cex.main=.8)
+plot(model, which = c(4)) 
+
+# Sub o sobredispersión
+sum(RP^2) / (model$df.res)
+
+```
+
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=15, fig.height=12}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+summary(model)
+
+library(car)
+Anova(model)
+
+drop1(model, test = "Chi")
+drop1(model, test = "LRT")
+
+library(emmeans)
+emmeans(model, pairwise ~ Tratamiento, type ="response")
+
+
+```
+
+
+```{r, echo=FALSE, fig.align='center', fig.asp=0.4, fig.width=15, fig.height=12}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE)
+
+library(ggplot2)
+gg_polin <- ggplot(polin, aes(Tratamiento, PROP, color = Tratamiento)) +
+  geom_point(size=8) +
+  geom_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
+  labs(x = "Tratamiento de polinización", y = "Cuajado de frutos") +
+  theme_classic()+
+  theme(text = element_text(size=20))+
+  theme(legend.title=element_blank())+
+  theme(legend.position = "bottom")+
+  theme(panel.grid.major.y = element_line(size=0.05, color='black'))+
+  theme(panel.grid.major.x = element_blank())+
+  theme(axis.text = element_text(color='black'))+
+  scale_color_viridis_d(option="D", end=0.8)
+gg_polin
+
+
+```
+
+## Conclusion
+
+Solo los tratamientos de polinización abierta [OP] (5.56%) y cruzamiento artificial con polen de otro genotipo [CPA] (21.28%) presentaron cuajado de frutos. Por lo tanto, la especie presenta autoincompatibilidad.

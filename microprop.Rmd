@@ -2,6 +2,13 @@
 title: "Ensayos de micropropagación"
 ---
 
+```{r, include=FALSE, error=TRUE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+
+
 # Hormonas
 
 ### Encabezado de la base de datos
